@@ -1,0 +1,58 @@
+{
+  "name": "blog-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "dev": "nodemon",
+    "build": "next build && tsc --project tsconfig.server.json",
+    "start": "cross-env NODE_ENV=production node dist/index.js"
+  },
+  "engines": {
+    "node": ">=8.2.0",
+    "npm": ">=3.10.10"
+  },
+  "keywords": [
+    "react",
+    "antd",
+    "typescript",
+    "mobx",
+    "nextjs",
+    "blog",
+    "SSR"
+  ],
+  "author": "liuyang",
+  "license": "MIT",
+  "dependencies": {
+    "@zeit/next-less": "^1.0.1",
+    "antd": "^4.0.2",
+    "babel-plugin-import": "^1.13.0",
+    "cross-env": "^7.0.2",
+    "less": "^3.11.1",
+    "less-vars-to-js": "^1.3.0",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.1.8",
+    "next": "^9.2.2",
+    "null-loader": "^3.0.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@types/node": "^13.9.0",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.3"
+  }
+}
