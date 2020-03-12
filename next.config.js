@@ -5,19 +5,19 @@ const fs = require('fs');
 const path = require('path');
 
 // Where your antd-custom.less file lives
-// const themeVariables = lessToJS(
-//   fs.readFileSync(path.resolve(__dirname, './assets/antd-custom.less'), 'utf8')
-// )
+const themeVariables = lessToJS(
+  fs.readFileSync(path.resolve(__dirname, './src/assets/antd-custom.less'), 'utf8')
+);
 
 module.exports = withLess({
   lessLoaderOptions: {
     javascriptEnabled: true,
-    //modifyVars: themeVariables, // make your antd custom effective
+    modifyVars: themeVariables, // make your antd custom effective
   },
   webpack: (config, { isServer }) => {
     if (isServer) {
-      const antStyles = /antd\/.*?\/style.*?/
-      const origExternals = [...config.externals]
+      const antStyles = /antd\/.*?\/style.*?/;
+      const origExternals = [...config.externals];
       config.externals = [
         (context, request, callback) => {
           if (request.match(antStyles)) return callback()
@@ -28,13 +28,26 @@ module.exports = withLess({
           }
         },
         ...(typeof origExternals[0] === 'function' ? [] : origExternals),
-      ]
+      ];
 
       config.module.rules.unshift({
         test: antStyles,
         use: 'null-loader',
       })
-    }
+    };
+
+    config.module.rules.push({
+      test: /\.(jpg|jpeg|png|svg|ttf|woff|woff2|eot|otf)$/,
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 1024, // base64
+          publicPath: '/_next/static/',
+          outputPath: 'static/',
+          name: '[name].[ext]',
+        },
+      },
+    });
     return config
   },
 })

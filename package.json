@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.{ts,js,tsx,jsx}\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" \"test/**/*.{ts,tsx,js,jsx}\"",
     "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node dist/index.js"
@@ -23,7 +23,10 @@
     "blog",
     "SSR"
   ],
-  "author": "liuyang",
+  "author": {
+    "name": "liuyang",
+    "email": "xy_liuy0305@163.com"
+  },
   "license": "MIT",
   "dependencies": {
     "@zeit/next-less": "^1.0.1",
@@ -35,7 +38,6 @@
     "mobx": "^5.15.4",
     "mobx-react": "^6.1.8",
     "next": "^9.2.2",
-    "null-loader": "^3.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
   },
@@ -51,8 +53,10 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "nodemon": "^2.0.2",
+    "null-loader": "^3.0.0",
     "prettier": "^1.19.1",
     "ts-node": "^8.6.2",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "url-loader": "^3.0.0"
   }
 }
