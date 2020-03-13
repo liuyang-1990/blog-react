@@ -2,6 +2,7 @@ import App from 'next/app';
 import React from 'react';
 import { fetchInitialStoreState, Store } from '../../store';
 import { Provider } from 'mobx-react';
+import '../styles/global.less';
 
 class MyMobxApp extends App {
   state = {
