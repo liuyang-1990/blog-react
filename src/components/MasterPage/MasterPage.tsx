@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import cx from 'classnames';
+import cn from 'classnames';
 import { Layout, BackTop } from 'antd';
 import { GithubOutlined, CopyrightOutlined } from '@ant-design/icons';
 import { LayoutContent } from './_components/LayoutContent/LayoutContent';
 import { LayoutHeader } from './_components/LayoutHeader/LayoutHeader';
 import { LayoutFooter } from './_components/LayoutFooter/LayoutFooter';
+import style from './style.module.less';
 
 const links = [
     {
@@ -35,7 +36,7 @@ const copyright = (
 );
 export const MasterPage: FC = (props) => {
     return (
-        <div>
+        <div className={cn(style['basicLayout'], style["basicLayout-topmenu"])}>
             <Layout>
                 <LayoutHeader />
                 <LayoutContent>{props.children}</LayoutContent>
