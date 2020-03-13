@@ -1,0 +1,1 @@
+export { MasterPage } from './MasterPage';

@@ -1,9 +1,14 @@
 import App from 'next/app';
 import React from 'react';
+import { Spin } from 'antd';
 import { fetchInitialStoreState, Store } from '../../store';
 import { Provider } from 'mobx-react';
+import { ProgressLoading, MasterPage } from '../components';
+//import { LoadingOutlined } from '@ant-design/icons';
 import '../styles/global.less';
-import { ProgressLoading } from '../components';
+
+
+//Spin.setDefaultIndicator(<LoadingOutlined spin style={{ fontSize: '180%', marginTop: 30 }} />);
 
 class MyMobxApp extends App {
   state = {
@@ -32,7 +37,9 @@ class MyMobxApp extends App {
     return (
       <Provider store={this.state.store}>
         <ProgressLoading showAfterMs={100} />
-        <Component {...pageProps} />
+        <MasterPage>
+          <Component {...pageProps} />
+        </MasterPage>
       </Provider>
     )
   }
