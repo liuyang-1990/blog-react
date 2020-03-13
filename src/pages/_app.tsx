@@ -3,6 +3,7 @@ import React from 'react';
 import { fetchInitialStoreState, Store } from '../../store';
 import { Provider } from 'mobx-react';
 import '../styles/global.less';
+import { ProgressLoading } from '../components';
 
 class MyMobxApp extends App {
   state = {
@@ -30,6 +31,7 @@ class MyMobxApp extends App {
     const { Component, pageProps } = this.props
     return (
       <Provider store={this.state.store}>
+        <ProgressLoading showAfterMs={100} />
         <Component {...pageProps} />
       </Provider>
     )
