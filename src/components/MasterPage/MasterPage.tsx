@@ -17,7 +17,7 @@ const links = [
     },
     {
         key: 'github',
-        title: "github",
+        title: <GithubOutlined />,
         href: 'https://github.com/liuyang-1990/blog-admin',
         blankTarget: true,
     },
@@ -31,7 +31,7 @@ const links = [
 
 const copyright = (
     <>
-        Copyright  2019 created by liuyang | Powered by .Net Core 2.2 on Linux
+        Copyright <CopyrightOutlined /> 2020 created by liuyang | Powered by .Net Core 3.1 on Linux
     </>
 );
 export const MasterPage: FC = (props) => {

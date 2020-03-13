@@ -4,11 +4,11 @@ import { Spin } from 'antd';
 import { fetchInitialStoreState, Store } from '../../store';
 import { Provider } from 'mobx-react';
 import { ProgressLoading, MasterPage } from '../components';
-//import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined } from '@ant-design/icons';
 import '../styles/global.less';
 
 
-//Spin.setDefaultIndicator(<LoadingOutlined spin style={{ fontSize: '180%', marginTop: 30 }} />);
+Spin.setDefaultIndicator(<LoadingOutlined spin style={{ fontSize: '180%', marginTop: 30 }} />);
 
 class MyMobxApp extends App {
   state = {
