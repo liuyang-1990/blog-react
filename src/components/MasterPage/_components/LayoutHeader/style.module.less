@@ -9,20 +9,13 @@
   box-shadow: @box-shadow-base;
   transition: background 0.3s, width 0.2s;
 
-  .ant-menu-submenu.ant-menu-submenu-horizontal {
-    height: 100%;
-    line-height: @layout-header-height;
-    .ant-menu-submenu-title {
-      height: 100%;
-    }
-  }
-
   &.light {
     background-color: @component-background;
     h1 {
       color: #002140;
     }
   }
+
 
   &-main {
     display: flex;
@@ -69,33 +62,14 @@
     height: @layout-header-height;
     line-height: @layout-header-height;
     border: none;
+       li{
+          height: 100%;
+          line-height: @layout-header-height;
+          div{
+            height: 100%;
+          }
+       }
   }
-}
-
-.index-right{
-   display: flex;
-    float: right;
-    height: 64px;
-    margin-left: auto;
-    overflow: hidden;
-    .index-action{
-      color: hsla(0,0%,100%,.85);
-      display: flex;
-      align-items: center;
-      height: 100%;
-      padding: 0 12px;
-      cursor: pointer;
-      transition: all .3s;
-      .index-avtar{
-        margin: 20px 8px 20px 0;
-        color: #1890ff;
-        vertical-align: top;
-        background: hsla(0,0%,100%,.85);
-      }
-      span{
-        color: hsla(0,0%,100%,.85);
-      }
-    }
 }
 .ant-avatar>img {
   display: block;
@@ -103,4 +77,37 @@
   height: 100%;
   object-fit: cover;
 }
+}
+
+.header-index-right{
+  display: flex;
+   float: right;
+   height: 64px;
+   margin-left: auto;
+   overflow: hidden;
+   .header-index-action{
+     display: flex;
+     align-items: center;
+     height: 100%;
+     padding: 0 12px;
+     cursor: pointer;
+     transition: all .3s;
+     .header-index-avtar{
+       margin: 20px 8px 20px 0;
+       color: #1890ff;
+       vertical-align: top;
+       background: hsla(0,0%,100%,.85);
+     }
+     .header-index-name{
+       color: rgba(0,0,0,.65);
+       vertical-align: middle;
+     }
+   }
+}
+
+
+.fixed-header{
+  z-index: 9;
+  width: 100%;
+  transition: width 0.2s;
 }

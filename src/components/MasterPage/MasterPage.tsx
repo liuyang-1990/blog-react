@@ -5,6 +5,7 @@ import { GithubOutlined, CopyrightOutlined } from '@ant-design/icons';
 import { LayoutContent } from './_components/LayoutContent/LayoutContent';
 import { LayoutHeader } from './_components/LayoutHeader/LayoutHeader';
 import { LayoutFooter } from './_components/LayoutFooter/LayoutFooter';
+import { ProgressLoading } from '../ProgressLoading';
 import style from './style.module.less';
 
 const links = [
@@ -34,15 +35,25 @@ const copyright = (
         Copyright <CopyrightOutlined /> 2020 created by liuyang | Powered by .Net Core 3.1 on Linux
     </>
 );
-export const MasterPage: FC = (props) => {
+
+type Props = {
+    disableSidebar?: boolean;
+    disableHeader?: boolean;
+    disableFooter?: boolean;
+}
+
+export const MasterPage: FC<Props> = (props) => {
     return (
-        <div className={cn(style['basicLayout'], style["basicLayout-topmenu"])}>
-            <Layout>
-                <LayoutHeader />
-                <LayoutContent>{props.children}</LayoutContent>
-                <LayoutFooter links={links} copyright={copyright} />
-                <BackTop visibilityHeight={100} />
+        <div className={cn(style['basicLayout'], 'basicLayout-topmenu')}>
+            <ProgressLoading showAfterMs={120} />
+            <Layout hasSider >   {/*style={{ minHeight: '100%' }}*/}
+                <Layout style={{ position: 'relative' }}>
+                    {!props.disableHeader && <LayoutHeader />}
+                    <LayoutContent>{props.children}</LayoutContent>
+                    {!props.disableHeader && <LayoutFooter links={links} copyright={copyright} />}
+                    <BackTop visibilityHeight={100} />
+                </Layout>
             </Layout>
         </div>
-    )
+    );
 }

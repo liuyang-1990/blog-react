@@ -37,7 +37,7 @@ class MyMobxApp extends App {
     return (
       <Provider store={this.state.store}>
         <ProgressLoading showAfterMs={100} />
-        <MasterPage>
+        <MasterPage {...pageProps}>
           <Component {...pageProps} />
         </MasterPage>
       </Provider>

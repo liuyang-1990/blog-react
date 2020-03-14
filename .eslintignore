@@ -20,7 +20,7 @@
 /_next
 /.next
 /next-env.d.ts
-
+/node_modules
 /tools/module-alias
 /tools/webpack
 /src/assets
