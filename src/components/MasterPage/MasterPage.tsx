@@ -19,7 +19,7 @@ const links = [
     {
         key: 'github',
         title: <GithubOutlined />,
-        href: 'https://github.com/liuyang-1990/blog-admin',
+        href: 'https://github.com/liuyang-1990/blog-react',
         blankTarget: true,
     },
     {
