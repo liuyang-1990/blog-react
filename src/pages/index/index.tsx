@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Card, List } from 'antd';
 import Link from "next/link";
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+import { httpClient } from '../../utils';
 
 const listData = [];
 for (let i = 0; i < 23; i++) {
@@ -20,7 +21,7 @@ const IconText = ({ icon, text }) => (
   </span>
 );
 
-const Home: FC = props => {
+const Article = props => {
   return (
     <Card>
       <List
@@ -52,7 +53,7 @@ const Home: FC = props => {
           >
             <List.Item.Meta
               title={
-                <Link href="/article/[id]" as={`/article/${item.id}`}>
+                <Link prefetch={false} href="/article/[id]" as={`/article/${item.id}`}>
                   <a>{item.title}</a>
                 </Link>
               }
@@ -63,7 +64,12 @@ const Home: FC = props => {
       />
     </Card>
   )
+};
+
+Article.getInitialProps = async ({ req }) => {
+  const res = await httpClient.get('https://api.github.com/repos/zeit/next.js', { baseURL: "" });
+  console.log(res);
+  const json = res.data;
+  return { stars: json.stargazers_count }
 }
-
-
-export default Home;
+export default Article;
