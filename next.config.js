@@ -1,6 +1,8 @@
 /* eslint-disable */
-const withWebpack = require("./tools/next/next-less.config.js")
-require('dotenv').config();
+const withWebpack = require("./tools/next/next-less.config")
+//env
+const env = require('./tools/next/next-dotenv-object');
+//require(process.env.n 'dotenv').config();
 
 // fix: prevents error when .less files are required by node
 if (typeof require !== 'undefined') {
@@ -9,9 +11,7 @@ if (typeof require !== 'undefined') {
 
 
 const nextConfig = {
-  env: {
-    TEST_VAR: process.env.TEST_VAR,
-  },
+  env,
   target: 'server',
   poweredByHeader: false,
 };
