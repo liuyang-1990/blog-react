@@ -49,7 +49,7 @@ export const MasterPage: FC<Props> = (props) => {
             <Layout hasSider >   {/*style={{ minHeight: '100%' }}*/}
                 <Layout style={{ position: 'relative' }}>
                     {!props.disableHeader && <LayoutHeader />}
-                    <LayoutContent>{props.children}</LayoutContent>
+                    <LayoutContent {...props}>{props.children}</LayoutContent>
                     {!props.disableHeader && <LayoutFooter links={links} copyright={copyright} />}
                     <BackTop visibilityHeight={100} />
                 </Layout>
