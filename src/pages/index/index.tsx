@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Carousel } from 'antd';
-import './style.less';
 
 
 const Article = props => {

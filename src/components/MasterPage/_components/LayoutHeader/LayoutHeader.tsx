@@ -2,6 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { Layout, Menu, Avatar } from 'antd';
 import style from './style.module.less';
+import Link from 'next/link';
 const { Header } = Layout;
 
 export const LayoutHeader = () => {
@@ -34,11 +35,13 @@ export const LayoutHeader = () => {
                         <div style={{ paddingRight: '8px' }}>
                             <div className={style['header-index-right']}>
                                 <span className={cn(style['header-index-action'], 'header-index-account')}>
-                                    <Avatar
-                                        size="small"
-                                        className={style['header-index-avtar']}
-                                        src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
-                                        alt="avatar" />
+                                    <Link href="/login" prefetch={false} passHref>
+                                        <Avatar
+                                            size="small"
+                                            className={style['header-index-avtar']}
+                                            src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
+                                            alt="avatar" />
+                                    </Link>
                                     <span className={style['index-name']}>admin</span>
                                 </span>
                             </div>

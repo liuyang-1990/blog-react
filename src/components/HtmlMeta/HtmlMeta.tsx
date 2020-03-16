@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import Head from 'next/head';
 
 type Props = {
-    title: string;
-    description: string;
-    keywords: string;
+    title?: string;
+    description?: string;
+    keywords?: string;
 }
 
 export const HtmlMeta: FC<Props> = ({ title, description, keywords }) => {
