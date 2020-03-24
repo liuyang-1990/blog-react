@@ -8,7 +8,7 @@ export const httpClient = axios.create({
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
-    //maxContentLength: 2000
+    maxContentLength: 20971520
 });
 
 // 添加请求拦截器

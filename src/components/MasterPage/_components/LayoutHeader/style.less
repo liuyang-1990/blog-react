@@ -1,220 +1,91 @@
-@import '~antd/es/style/themes/default.less';
+@import '~antd/lib/style/themes/default.less';
+@import '../../../../styles/theme.less';
 
-@top-nav-header-prefix-cls: ~'top-nav-header';
+@header-height   : 64px;
+@menu-item-border: 2px;
+@mobile-max-width: 767.99px;
 
-// .top-menu {
-//   background-color: @component-background;
-//   position        : relative;
-//   width           : 100%;
-//   height          : @layout-header-height;
-//   box-shadow      : @box-shadow-base;
-//   transition      : background 0.3s, width 0.2s;
-//   padding         : 0;
-//   z-index         : 9;
+#header {
+  position: relative;
+  z-index: 10;
+  max-width: 100%;
+  background: @component-background;
+  box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
 
-//   .top-nav-header-logo {
-//     position   : relative;
-//     height     : @layout-header-height;
-//     overflow   : hidden;
-//     line-height: @layout-header-height;
-//     transition : all 0.3s;
-//     text-align : center;
-
-//     img {
-//       display       : inline-block;
-//       height        : 32px;
-//       vertical-align: middle;
-//     }
-
-//     h1 {
-//       display       : inline-block;
-//       margin        : 0 0 0 12px;
-//       color         : @btn-primary-color;
-//       font-weight   : 400;
-//       font-size     : 16px;
-//       vertical-align: top;
-//       color         : #002140;
-//     }
-//   }
-
-//   .header-right {
-//     display    : flex;
-//     float      : right;
-//     height     : 64px;
-//     margin-left: auto;
-//     overflow   : hidden;
-
-//     .top-nav-menu {
-//       height     : @layout-header-height;
-//       line-height: @layout-header-height;
-//       border     : none;
-
-//       .ant-menu-submenu.ant-menu-submenu-horizontal {
-//         height     : 100%;
-//         line-height: @layout-header-height;
-
-//         .ant-menu-submenu-title {
-//           height: 100%;
-//         }
-//       }
-//     }
-
-//     .header-account {
-//       padding: 0 40px 0 16px;
-//     }
-//   }
-
-// }
-
-
-.@{top-nav-header-prefix-cls} {
-  position  : relative;
-  width     : 100%;
-  height    : @layout-header-height;
-  box-shadow: @box-shadow-base;
-  transition: background 0.3s, width 0.2s;
-
-  &.light {
-    background-color: @component-background;
-
-    h1 {
-      color: #002140;
-    }
-  }
-
-  &-main {
-    display     : flex;
-    height      : @layout-header-height;
-    padding-left: 24px;
-
-    &.wide {
-      max-width   : 1200px;
-      margin      : auto;
-      padding-left: 0;
-    }
-
-    @media screen and (max-width: @screen-sm) {
-      .top-nav-menu {
-        display: none
-      }
-    }
-
-    .left {
-      display: flex;
-      flex   : 1;
-    }
-
-    .right {
-      width: 324px;
-    }
-  }
-
-  &-logo {
-    position   : relative;
-    min-width  : 165px;
-    height     : @layout-header-height;
-    overflow   : hidden;
-    line-height: @layout-header-height;
-    transition : all 0.3s;
-
-    img {
-      display       : inline-block;
-      height        : 32px;
-      vertical-align: middle;
-    }
-
-    h1 {
-      display       : inline-block;
-      margin        : 0 0 0 12px;
-      color         : @btn-primary-color;
-      font-weight   : 400;
-      font-size     : 16px;
-      vertical-align: top;
-    }
-  }
-
-
-  @media screen and (max-width: @screen-lg) {
-    &-logo {
-      text-align: center;
-
-      h1 {
-        display: none !important;
-      }
-    }
-  }
-
-  &-menu {
-    .ant-menu.ant-menu-horizontal {
-      height     : @layout-header-height;
-      line-height: @layout-header-height;
-      border     : none;
-    }
-
-    .ant-menu-item {
-      height     : 100%;
-      line-height: @layout-header-height;
-    }
-  }
-
-  .ant-avatar>img {
-    display   : block;
-    width     : 100%;
-    height    : 100%;
-    object-fit: cover;
-  }
-}
-
-.header-index-right {
-  display    : flex;
-  float      : right;
-  height     : 64px;
-  margin-left: auto;
-  overflow   : hidden;
-
-  @media screen and (max-width: @screen-sm) {
-    .header-index-action.headerSearch {
-      display: none
-    }
-  }
-
-  .header-index-action {
-    display    : flex;
+  .menu-row {
+    display: flex;
     align-items: center;
-    height     : 100%;
-    padding    : 0 12px;
-    cursor     : pointer;
-    transition : all .3s;
+    margin: 0;
 
-    span {
-      color         : rgba(0, 0, 0, .65);
-      vertical-align: middle;
+    > * {
+      flex: none;
+      margin: 0 16px 0 0;
+
+      &:last-child {
+        margin-right: 40px;
+      }
     }
+  }
 
-    .header-index-avtar {
-      margin        : 20px 8px 20px 0;
-      color         : #1890ff;
-      vertical-align: top;
-      background    : hsla(0, 0%, 100%, .85);
+  // Adjust github button style
+
+  .ant-row-rtl {
+    .menu-row {
+      > * {
+        &:last-child {
+          margin-right: 16px;
+          margin-left: 40px;
+        }
+      }
     }
+  }
 
-    .header-index-name {
-      color         : rgba(0, 0, 0, .65);
-      vertical-align: middle;
+  // Buttons
+  .header-button {
+    color: @text-color;
+    border-color: @border-color-base;
+  }
+}
+
+@media only screen and (max-width: @mobile-max-width) {
+  #header {
+    text-align: center;
+  }
+}
+
+#logo {
+  height         : @header-height;
+  padding-left   : 40px;
+  overflow       : hidden;
+  color          : @site-heading-color;
+  font-size      : 18px;
+  font-family    : Avenir, @font-family, sans-serif;
+  line-height    : @header-height;
+  white-space    : nowrap;
+  text-decoration: none;
+
+  .ant-row-rtl & {
+    float        : right;
+    padding-right: 40px;
+    padding-left : 0;
+  }
+
+  img {
+    position    : relative;
+    top         : -1.5px;
+    height      : 32px;
+    margin-right: 16px;
+
+    .ant-row-rtl & {
+      margin-right: 0;
+      margin-left : 16px;
     }
   }
 }
 
-.header-trigger {
-  height    : 64px;
-  padding   : 0 24px;
-  font-size : 20px;
-  cursor    : pointer;
-  transition: all .3s, padding 0s;
-}
-
-.fixed-header {
-  z-index   : 9;
-  width     : 100%;
-  transition: width 0.2s;
+@media only screen and (max-width: @mobile-max-width) {
+  #logo {
+    padding-right: 0;
+    padding-left : 0;
+  }
 }

@@ -7,6 +7,7 @@ import { LayoutHeader } from './_components/LayoutHeader/LayoutHeader';
 import { LayoutFooter } from './_components/LayoutFooter/LayoutFooter';
 import { ProgressLoading } from '../ProgressLoading';
 import style from './style.module.less';
+import { SiteContextProvider, SiteContext } from './SiteContext';
 
 const links = [
     {
@@ -44,16 +45,19 @@ type Props = {
 
 export const MasterPage: FC<Props> = (props) => {
     return (
-        <div className={cn(style['basicLayout'], 'basicLayout-topmenu')}>
-            <ProgressLoading showAfterMs={120} />
-            <Layout hasSider >   {/*style={{ minHeight: '100%' }}*/}
-                <Layout style={{ position: 'relative' }}>
-                    {!props.disableHeader && <LayoutHeader />}
-                    <LayoutContent {...props}>{props.children}</LayoutContent>
-                    {!props.disableHeader && <LayoutFooter links={links} copyright={copyright} />}
-                    <BackTop visibilityHeight={100} />
+        <SiteContextProvider>
+            <div className={cn(style['basicLayout'], 'basicLayout-topmenu')}>
+                <ProgressLoading showAfterMs={120} />
+                <Layout hasSider >   {/*style={{ minHeight: '100%' }}*/}
+                    <Layout style={{ position: 'relative' }}>
+                        {!props.disableHeader && <LayoutHeader />}
+                        <LayoutContent {...props}>{props.children}</LayoutContent>
+                        {!props.disableHeader && <LayoutFooter links={links} copyright={copyright} />}
+                        <BackTop visibilityHeight={100} />
+                    </Layout>
                 </Layout>
-            </Layout>
-        </div>
+            </div>
+        </SiteContextProvider>
+
     );
 }
