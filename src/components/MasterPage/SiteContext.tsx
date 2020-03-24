@@ -1,25 +1,21 @@
 import React, {
     FC,
     createContext,
-    useState
+    useState,
+    useEffect
 } from 'react'
 
 const SiteContext = createContext<{
     isMobile: boolean;
-    setIsMobile: Function;
 }>({
-    isMobile: false,
-    setIsMobile: () => { }
+    isMobile: false
 });
 
-const SiteContextProvider: FC = props => {
-    const { children } = props;
-    const [isMobile, setIsMobile] = useState(false);
-
-    return (<SiteContext.Provider {...props}
-        value={{ isMobile: isMobile, setIsMobile: setIsMobile }}>
-        {children}
-    </SiteContext.Provider>)
-}
-
-export { SiteContext, SiteContextProvider }
+// const ViewportProvider: FC = props => {
+//     const [width, setWidth] = useState(1400);
+//     return
+//     (<SiteContext.Provider {...props} value={{}}>
+//         {props.children}
+//     </SiteContext.Provider>)
+// }
+export { SiteContext }

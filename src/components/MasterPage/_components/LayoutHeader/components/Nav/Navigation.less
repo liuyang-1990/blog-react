@@ -1,25 +1,35 @@
 @import '~antd/lib/style/themes/default.less';
 @import '../../../../../../styles/theme.less';
 
+.nav-phone-icon {
+  position: absolute;
+  top     : 25px;
+  right   : 30px;
+  z-index : 1;
+  display : none;
+  width   : 16px;
+  height  : 22px;
+  cursor  : pointer;
+}
 
 #nav {
-  height: 100%;
-  font-size: 14px;
+  height     : 100%;
+  font-size  : 14px;
   font-family: Avenir, @font-family, sans-serif;
-  border: 0;
+  border     : 0;
 
   &.ant-menu-horizontal {
     border-bottom: none;
 
-    & > .ant-menu-item,
-    & > .ant-menu-submenu {
-      min-width: 72px;
-      height: @header-height;
+    &>.ant-menu-item,
+    &>.ant-menu-submenu {
+      min-width  : 72px;
+      height     : @header-height;
       line-height: @header-height - @menu-item-border - 2px;
-      border-top: @menu-item-border solid transparent;
+      border-top : @menu-item-border solid transparent;
 
       &:hover {
-        border-top: @menu-item-border solid @primary-color;
+        border-top   : @menu-item-border solid @primary-color;
         border-bottom: @menu-item-border solid transparent;
       }
     }
@@ -28,22 +38,23 @@
       margin: 0;
     }
 
-    & > .ant-menu-submenu-open {
-      border-top: @menu-item-border solid @primary-color;
+    &>.ant-menu-submenu-open {
+      border-top   : @menu-item-border solid @primary-color;
       border-bottom: @menu-item-border solid transparent;
     }
 
-    & > .ant-menu-item-selected {
-      border-top: @menu-item-border solid @primary-color;
+    &>.ant-menu-item-selected {
+      border-top   : @menu-item-border solid @primary-color;
       border-bottom: @menu-item-border solid transparent;
+
       a {
         color: @primary-color;
       }
     }
   }
 
-  & > .ant-menu-item,
-  & > .ant-menu-submenu {
+  &>.ant-menu-item,
+  &>.ant-menu-submenu {
     text-align: center;
   }
 }
@@ -64,6 +75,7 @@
     padding: 0;
 
     #nav {
+
       .ant-menu-item,
       .ant-menu-submenu {
         text-align: left;
