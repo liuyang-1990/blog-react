@@ -5,8 +5,12 @@ body {
   color      : @site-text-color;
   font-size  : 14px;
   font-family: @font-family;
-  background : @body-background;
+  background : #f0f2f5;
   transition : background 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.user-select {
+  user-select: none;
 }
 
 a {
@@ -16,14 +20,14 @@ a {
 .main-wrapper {
   position  : relative;
   padding   : 40px 0 0;
-  background: @component-background;
+  background: #f0f2f5;
 }
 
 .main-container {
   position  : relative;
   min-height: 500px;
   padding   : 0 170px 32px 64px;
-  background: @component-background;
+  background: #f0f2f5;
 
   .ant-row-rtl & {
     padding: 0 64px 144px 170px;
