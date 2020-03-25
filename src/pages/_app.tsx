@@ -1,11 +1,13 @@
 import App from 'next/app';
 import React from 'react';
 import { Spin } from 'antd';
-import { ProgressLoading, MasterPage } from '../components';
+import { MasterPage } from '../components';
 import { LoadingOutlined } from '@ant-design/icons';
+import { SiteContextProvider } from '../context/SiteContext';
 import '../styles/global.less';
 import '../styles/responsive.less';
 import '../styles/reset.less';
+
 
 Spin.setDefaultIndicator(<LoadingOutlined spin style={{ fontSize: '180%', marginTop: 30 }} />);
 
@@ -23,12 +25,11 @@ class CustomApp extends App {
   render() {
     const { Component, pageProps } = this.props
     return (
-      <>
-        <ProgressLoading showAfterMs={100} />
+      <SiteContextProvider>
         <MasterPage {...pageProps}>
           <Component {...pageProps} />
         </MasterPage>
-      </>
+      </SiteContextProvider>
     )
   }
 }

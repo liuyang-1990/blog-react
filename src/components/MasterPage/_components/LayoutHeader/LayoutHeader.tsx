@@ -1,27 +1,21 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Row, Col, Popover, Button } from 'antd';
 import { UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
 import { SearchBox, Navigation } from './components';
-import { SiteContext } from '../../SiteContext';
+import { SiteContext } from '../../../../context/SiteContext';
 import cn from 'classnames';
 import GitHubButton from 'react-github-button';
-import { RESPONSIVE_XS, RESPONSIVE_SM } from '../../../../utils';
 import './style.less';
 
 export const LayoutHeader = () => {
 
     const [searching, setSearching] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
-    const [windowWidth, setWindowWidth] = useState(1400);
-    const { isMobile } = useContext(SiteContext);
+    const { isMobile, width, responsive } = useContext(SiteContext);
 
     function onTriggerSearching(searching: boolean) {
         setSearching(searching);
     };
-
-    function onWindowResize() {
-        setWindowWidth(window.innerWidth);
-    }
 
     function handleShowMenu() {
         setMenuVisible(true);
@@ -33,23 +27,10 @@ export const LayoutHeader = () => {
     function onMenuVisibleChange(visible: boolean) {
         setMenuVisible(visible);
     }
-    useEffect(() => {
-        window.addEventListener("resize", onWindowResize);
-        //  onWindowResize();
-        return () => {
-            window.removeEventListener("resize", onWindowResize);
-        }
-    });
     const headerClassName = cn({
         clearfix: true,
         //'home-header': isHome,
     });
-    let responsive: null | 'narrow' | 'crowded' = null;
-    if (windowWidth < RESPONSIVE_XS) {
-        responsive = 'crowded';
-    } else if (windowWidth < RESPONSIVE_SM) {
-        responsive = 'narrow';
-    }
 
     const navigationNode = (
         <Navigation
@@ -72,16 +53,15 @@ export const LayoutHeader = () => {
             namespace="ant-design"
             repo="ant-design"
         />,
-        <Button size="small" className="header-button header-account-button">
+        <Button size="small" key="account" className="header-button header-account-button">
             <UserOutlined />
             登录
         </Button>
     ];
 
-
-    if (windowWidth < RESPONSIVE_XS) {
+    if (responsive == "crowded") {
         menu = searching ? [] : [navigationNode];
-    } else if (windowWidth < RESPONSIVE_SM) {
+    } else if (responsive == "narrow") {
         menu = searching ? [] : menu;
     }
     const colProps =
