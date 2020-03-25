@@ -1,24 +1,20 @@
 @import '~antd/lib/style/themes/default.less';
 @import '../../../../styles/theme.less';
 
-@header-height   : 64px;
-@menu-item-border: 2px;
-@mobile-max-width: 767.99px;
-
 #header {
-  position: relative;
-  z-index: 10;
-  max-width: 100%;
+  position  : relative;
+  z-index   : 10;
+  max-width : 100%;
   background: @component-background;
   box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
 
   .menu-row {
-    display: flex;
+    display    : flex;
     align-items: center;
-    margin: 0;
+    margin     : 0;
 
-    > * {
-      flex: none;
+    >* {
+      flex  : none;
       margin: 0 16px 0 0;
 
       &:last-child {
@@ -31,10 +27,10 @@
 
   .ant-row-rtl {
     .menu-row {
-      > * {
+      >* {
         &:last-child {
           margin-right: 16px;
-          margin-left: 40px;
+          margin-left : 40px;
         }
       }
     }
@@ -42,7 +38,7 @@
 
   // Buttons
   .header-button {
-    color: @text-color;
+    color       : @text-color;
     border-color: @border-color-base;
   }
 }
@@ -87,5 +83,53 @@
   #logo {
     padding-right: 0;
     padding-left : 0;
+  }
+}
+
+#github-btn {
+  display  : flex;
+  flex-flow: nowrap;
+  height   : auto;
+
+  .gh-btn {
+    height    : auto;
+    padding   : 1px 4px;
+    background: transparent;
+    border    : 0;
+
+    .gh-ico {
+      width : 20px;
+      height: 20px;
+      margin: 0;
+    }
+
+    .gh-text {
+      display: none;
+    }
+  }
+
+  .gh-count {
+    height     : auto;
+    padding    : 4px 8px;
+    font-weight: normal;
+    background : #fff;
+
+    &:hover {
+      color: @primary-color;
+    }
+  }
+
+  &.responsive-mode {
+    .gh-count {
+      display: none !important;
+    }
+  }
+}
+
+.ant-row-rtl {
+  #github-btn {
+    .gh-count {
+      display: none !important;
+    }
   }
 }

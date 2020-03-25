@@ -4,6 +4,8 @@ import { Spin } from 'antd';
 import { ProgressLoading, MasterPage } from '../components';
 import { LoadingOutlined } from '@ant-design/icons';
 import '../styles/global.less';
+import '../styles/responsive.less';
+import '../styles/reset.less';
 
 Spin.setDefaultIndicator(<LoadingOutlined spin style={{ fontSize: '180%', marginTop: 30 }} />);
 

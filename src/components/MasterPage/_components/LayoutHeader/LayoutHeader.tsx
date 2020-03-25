@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
-import cn from 'classnames';
 import { Row, Col, Popover, Button } from 'antd';
 import { UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
 import { SearchBox, Navigation } from './components';
 import { SiteContext } from '../../SiteContext';
+import cn from 'classnames';
+import GitHubButton from 'react-github-button';
 import { RESPONSIVE_XS, RESPONSIVE_SM } from '../../../../utils';
 import './style.less';
 
@@ -49,6 +50,40 @@ export const LayoutHeader = () => {
     } else if (windowWidth < RESPONSIVE_SM) {
         responsive = 'narrow';
     }
+
+    const navigationNode = (
+        <Navigation
+            key="nav"
+            responsive={responsive}
+            isMobile={isMobile}
+        />
+    );
+
+    let menu: (React.ReactElement | null)[] = [
+        navigationNode,
+        <GitHubButton
+            key="github"
+            id="github-btn"
+            className={cn({
+                'responsive-mode': responsive,
+                [`responsive-${responsive}`]: responsive,
+            })}
+            type="stargazers"
+            namespace="ant-design"
+            repo="ant-design"
+        />,
+        <Button size="small" className="header-button header-account-button">
+            <UserOutlined />
+            登录
+        </Button>
+    ];
+
+
+    if (windowWidth < RESPONSIVE_XS) {
+        menu = searching ? [] : [navigationNode];
+    } else if (windowWidth < RESPONSIVE_SM) {
+        menu = searching ? [] : menu;
+    }
     const colProps =
         // isHome? [{ flex: 'none' }, { flex: 'auto' }]  :
         [
@@ -75,12 +110,13 @@ export const LayoutHeader = () => {
                 <Popover
                     overlayClassName="popover-menu"
                     placement="bottomRight"
-                    content={<Navigation />}
+                    content={menu}
                     trigger="click"
                     visible={menuVisible}
+                    onVisibleChange={onMenuVisibleChange}
                     arrowPointAtCenter
                 >
-                    <UnorderedListOutlined className="nav-phone-icon" onClick={() => onMenuVisibleChange} />
+                    <UnorderedListOutlined className="nav-phone-icon" onClick={handleShowMenu} />
                 </Popover>
             )}
             <Row style={{ flexFlow: 'nowrap' }}>
@@ -93,12 +129,8 @@ export const LayoutHeader = () => {
                     </h1>
                 </Col>
                 <Col {...colProps[1]} className="menu-row">
-                    <SearchBox key="search" responsive={responsive} onTriggerFocus={() => onTriggerSearching} />
-                    {!isMobile && <Navigation />}
-                    <Button type='primary' size="small" className="header-button header-lang-button">
-                        <UserOutlined />
-                        登录
-                    </Button>
+                    <SearchBox key="search" responsive={responsive} onTriggerFocus={onTriggerSearching} />
+                    {!isMobile && menu}
                 </Col>
             </Row>
         </header >
