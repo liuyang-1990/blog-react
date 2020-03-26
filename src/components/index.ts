@@ -1,3 +1,4 @@
-export { ProgressLoading } from './ProgressLoading/ProgressLoading';
-export { MasterPage } from './MasterPage/MasterPage';
-export { HtmlMeta } from './HtmlMeta/HtmlMeta';
+export { ProgressLoading } from './ProgressLoading';
+export { MasterPage } from './MasterPage';
+export { HtmlMeta } from './HtmlMeta';
+export { DarkIcon, DefaultIcon } from "./ThemeIcon";

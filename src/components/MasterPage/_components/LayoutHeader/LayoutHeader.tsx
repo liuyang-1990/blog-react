@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Row, Col, Popover, Button } from 'antd';
-import { UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
+import { UnorderedListOutlined, LoginOutlined } from '@ant-design/icons';
 import { SearchBox, Navigation } from './components';
 import { SiteContext } from '../../../../context/SiteContext';
 import cn from 'classnames';
@@ -54,7 +54,7 @@ export const LayoutHeader = () => {
             repo="ant-design"
         />,
         <Button size="small" key="account" className="header-button header-account-button">
-            <UserOutlined />
+           <LoginOutlined />
             登录
         </Button>
     ];

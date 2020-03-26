@@ -1,0 +1,1 @@
+export { DefaultIcon, DarkIcon } from "./ThemeIcon";

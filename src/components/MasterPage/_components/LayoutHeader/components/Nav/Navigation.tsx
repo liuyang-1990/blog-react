@@ -5,6 +5,7 @@ import {
     EditOutlined,
     FolderOutlined,
     UserOutlined,
+    LoginOutlined,
     GithubOutlined,
     UnorderedListOutlined
 } from '@ant-design/icons';
@@ -27,7 +28,7 @@ let Navigation: FC<Props> = ({ isMobile, responsive }) => {
             </a>
         </Menu.Item>,
         <Menu.Item key="account" >
-            <UserOutlined />
+            <LoginOutlined />
             登录
         </Menu.Item>
     ];
