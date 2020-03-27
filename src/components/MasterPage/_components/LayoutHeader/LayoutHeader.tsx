@@ -40,6 +40,10 @@ export const LayoutHeader = () => {
         />
     );
 
+    let handleClick = () => {
+        window.location.href = "/signup";
+    }
+
     let menu: (React.ReactElement | null)[] = [
         navigationNode,
         <GitHubButton
@@ -53,10 +57,14 @@ export const LayoutHeader = () => {
             namespace="ant-design"
             repo="ant-design"
         />,
-        <Button size="small" key="account" className="header-button header-account-button">
-           <LoginOutlined />
+        <Button size="small" key="signin" className="header-button header-signin-button">
+            <LoginOutlined />
             登录
-        </Button>
+        </Button>,
+        <Button size="small" key="signup" className="header-button header-signup-button" onClick={handleClick}>
+            <LoginOutlined />
+            注册
+       </Button>
     ];
 
     if (responsive == "crowded") {

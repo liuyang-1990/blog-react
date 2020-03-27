@@ -27,10 +27,14 @@ let Navigation: FC<Props> = ({ isMobile, responsive }) => {
                 Github
             </a>
         </Menu.Item>,
-        <Menu.Item key="account" >
+        <Menu.Item key="signin" >
             <LoginOutlined />
             登录
-        </Menu.Item>
+        </Menu.Item>,
+        <Menu.Item key="signup" >
+            <LoginOutlined />
+            注册
+        </Menu.Item>,
     ];
     if (isMobile) {
         additional = additionalItems;

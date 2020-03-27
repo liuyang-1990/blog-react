@@ -2,7 +2,7 @@ import React from 'react';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import _ from 'lodash';
-
+import "./nprogress.less";
 interface IProps {
     showAfterMs?: number;
 }
