@@ -52,16 +52,5 @@ export const MasterPage: FC<Props> = (props) => {
             {!props.disableFooter && <LayoutFooter links={links} copyright={copyright} />}
             <BackTop visibilityHeight={100} />
         </div>
-        // <div className={cn(style['basicLayout'], 'basicLayout-topmenu')}>
-        //     <ProgressLoading showAfterMs={120} />
-        //     <Layout hasSider >   {/*style={{ minHeight: '100%' }}*/}
-        //         <Layout style={{ position: 'relative' }}>
-        //             {!props.disableHeader && <LayoutHeader />}
-        //             <LayoutContent {...props}>{props.children}</LayoutContent>
-        //             {!props.disableHeader && <LayoutFooter links={links} copyright={copyright} />}
-        //             <BackTop visibilityHeight={100} />
-        //         </Layout>
-        //     </Layout>
-        // </div>
     );
 }
