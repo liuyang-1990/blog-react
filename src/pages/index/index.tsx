@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Card, List } from 'antd';
 import Link from "next/link";
-import { MessageOutlined, LikeOutlined, StarOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import { MessageOutlined, EyeOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import "./index.less";
 
 
@@ -24,46 +24,38 @@ const IconText = ({ icon, text }) => (
 
 const Article = props => {
     return (
-        <Card bordered={false}>
-            <List
-                itemLayout="vertical"
-                size="large"
-                pagination={{
-                    onChange: page => {
-                        console.log(page);
-                    },
-                    pageSize: 10,
-                }}
-                dataSource={listData}
-                renderItem={item => (
-                    <List.Item
-                        key={item.title}
-                        actions={[
-                            <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
-                            <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-                            <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
-                            <IconText icon={ClockCircleOutlined} text="2020-03-14 21:18" key="list-vertical-clock" />
-                        ]}
-                        extra={
-                            <img
-                                width={200}
-                                alt="logo"
-                                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                            />
-                        }
-                    >
-                        <List.Item.Meta
-                            title={
-                                <Link prefetch={false} href="/article/[id]" as={`/article/${item.id}`}>
-                                    <a>{item.title}</a>
-                                </Link>
-                            }
-                        />
-                        {item.content}
-                    </List.Item>
-                )}
-            />
-        </Card>
+        <React.Fragment>
+            <article className="excerpt">
+                <a className="focus" href="http://www.muzhuangnet.com/show/1258.html" title="C# 字符串长度区分中英文截取">
+                    <img className="thumb" src="http://www.muzhuangnet.com/upload/201610/20/201610201731443264.jpg" alt="字符串长度区分中英文截取" style={{ display: "inlie" }} />
+                </a>
+                <header>
+                    <a className="cat" href="http://www.muzhuangnet.com/list/dotnet/" title=".NET" >.NET<i></i></a>
+                    <h2>
+                        <a href="http://www.muzhuangnet.com/show/1257.html" title="C# 字符串长度区分中英文截取">C# 字符串长度区分中英文截取</a>
+                    </h2>
+                </header>
+                <p className="meta">
+                    <time className="time">
+                        <IconText icon={ClockCircleOutlined} text="2020-03-14 21:18" key="list-vertical-clock" />
+                    </time>
+                    <span className="views">
+                        <IconText icon={EyeOutlined} text="156" key="list-vertical-views" />
+                    </span>
+                    <a className="comment" href="http://www.muzhuangnet.com/show/1257.html#comment" title="评论">
+                        <IconText icon={MessageOutlined} text="2" key="list-vertical-comment" />
+                    </a>
+                </p>
+                <p className="note">
+                    #region   字符串长度区分中英文截取/// &lt;summary&gt;   /// 截取文本，区分中英文字符，中文算两个长度，英文算一个长度/// &lt;/summary&gt;/// &lt;param name="str"&gt;待截取的字符串&lt;/param&gt;/// &lt;param name="length"&gt;需计算长度的字…
+                </p>
+            </article>
+            <div className="ias_trigger">
+                <a href="javascript:;">查看更多</a>
+            </div>
+        </React.Fragment>
+
+
     )
 };
 
@@ -71,8 +63,5 @@ const Article = props => {
 //     // const res = await httpClient.get('https://api.github.com/repos/zeit/next.js', { baseURL: "" });
 //     // const json = res.data;
 //     // return { stars: json.stargazers_count }
-//     return {
-
-//     }
 // }
 export default Article;

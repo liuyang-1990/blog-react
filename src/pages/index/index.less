@@ -1,0 +1,211 @@
+.excerpt {
+    clear           : both;
+    border          : 1px solid #EAEAEA;
+    padding         : 20px 20px 20px 255px;
+    overflow        : hidden;
+    background-color: #fff;
+    margin-bottom   : -1px;
+    border-radius   : 4px 4px 0 0;
+
+    &:hover {
+        background-color: #FBFDFF;
+        border-color    : #42B5EF;
+        position        : relative;
+        z-index         : 20;
+    }
+
+    .focus {
+        float      : left;
+        margin-left: -235px;
+        width      : 220px;
+
+        &:hover {
+            -webkit-transform                 : scale(1.05);
+            transform                         : scale(1.05);
+            -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+            transition-timing-function        : cubic-bezier(0.47, 2.02, 0.31, -0.36);
+        }
+    }
+
+    .thumb {
+        border-radius: 5px;
+        width        : 220px;
+        height       : 150px;
+        overflow     : hidden;
+    }
+
+    header {
+        margin-bottom: 10px;
+    }
+
+    .cat {
+        color           : #FFF;
+        background-color: #3399CC;
+        padding         : 3px 6px;
+        font-size       : 12px;
+        display         : inline-block;
+        position        : relative;
+        top             : -2px;
+        margin-right    : 6px;
+
+        &:hover {
+            opacity: .8;
+        }
+
+        i {
+            position      : absolute;
+            top           : 50%;
+            margin-top    : -4px;
+            right         : -4px;
+            display       : inline-block;
+            width         : 0;
+            height        : 0;
+            vertical-align: middle;
+            border-left   : 4px solid #3399CC;
+            border-top    : 4px solid transparent;
+            border-bottom : 4px solid transparent;
+        }
+    }
+
+    h2 {
+        display    : inline;
+        font-size  : 18px;
+        line-height: 24px;
+        margin-top : 0;
+        font-weight: bold;
+
+        a {
+            color: #555;
+
+            &:hover {
+                color: #3399CC;
+            }
+        }
+    }
+
+    .meta {
+        color        : #999;
+        font-size    : 12px;
+        margin-bottom: 10px;
+
+        a {
+            color: #999;
+        }
+    }
+
+    .time,
+    .comment,
+    .views {
+        cursor      : pointer;
+        margin-right: 20px;
+
+        &:hover {
+            color: #3399CC;
+        }
+    }
+
+    .note {
+        font-size  : 12px;
+        color      : #999;
+        word-wrap  : break-word;
+        line-height: 20px;
+        cursor     : default;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .excerpt {
+        padding: 10px 10px 10px 120px;
+
+        .focus {
+            width      : 100px;
+            margin-left: -110px;
+        }
+
+        .thumb {
+            width : 100px;
+            height: 68px;
+        }
+
+        h2 {
+            height     : 36px;
+            overflow   : hidden;
+            display    : block;
+            position   : relative;
+            font-size  : 16px;
+            line-height: 18px;
+
+            &>:first-child {
+                float      : right;
+                width      : 100%;
+                margin-left: -5px;
+            }
+        }
+
+        .cat,
+        .views,
+        .note {
+            display: none
+        }
+    }
+}
+
+.ias_trigger {
+    margin: 15px 0 0;
+
+    a {
+        display         : block;
+        background-color: #E6E6E6;
+        line-height     : 32px;
+        text-align      : center;
+        color           : #999;
+
+        &:hover {
+            display         : block;
+            background-color: #DDD;
+            color           : #666;
+        }
+    }
+}
+
+@media only screen and (max-width: 640px) {
+
+    .excerpt {
+
+        padding: 10px 10px 10px 180px;
+
+        .focus {
+            width      : 160px;
+            margin-left: -170px;
+        }
+
+        .thumb {
+            width : 160px;
+            height: 109px;
+        }
+
+        .cat {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 680px) {
+    .excerpt {
+        .comment {
+            display: none;
+        }
+    }
+
+}
+
+
+@media only screen and (max-width: 700px) {
+    .excerpt {
+
+        .note {
+            height  : 60px;
+            overflow: hidden;
+        }
+    }
+}
