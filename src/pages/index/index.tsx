@@ -51,7 +51,7 @@ const Article = props => {
                 </p>
             </article>
             <div className="ias_trigger">
-                <a href="javascript:;">查看更多</a>
+                <a href="#" onClick={e => e.preventDefault()}>查看更多</a>
             </div>
         </React.Fragment>
 

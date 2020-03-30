@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Row, Col, Tooltip, Avatar, Card } from 'antd';
 import cn from 'classnames';
-import { DarkIcon, DefaultIcon } from '../../../../components';
-import { ThemeContext } from '../../../../context';
+import { DarkIcon, DefaultIcon } from '../ThemeIcon';
+import { ThemeContext } from '../../context';
 import './style.less';
 
 

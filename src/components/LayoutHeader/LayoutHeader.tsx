@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Row, Col, Popover, Button } from 'antd';
 import { UnorderedListOutlined, LoginOutlined } from '@ant-design/icons';
 import { SearchBox, Navigation } from './components';
-import { SiteContext } from '../../../../context/SiteContext';
+import { SiteContext } from '../../context';
 import cn from 'classnames';
 import GitHubButton from 'react-github-button';
 import './style.less';

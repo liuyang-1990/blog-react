@@ -1,12 +1,9 @@
 import React, { FC } from 'react';
-import cn from 'classnames';
-import { Layout, BackTop } from 'antd';
+import { BackTop } from 'antd';
 import { GithubOutlined, CopyrightOutlined } from '@ant-design/icons';
-import { LayoutContent } from './_components/LayoutContent/LayoutContent';
-import { LayoutHeader } from './_components/LayoutHeader/LayoutHeader';
-import { LayoutFooter } from './_components/LayoutFooter/LayoutFooter';
-import { ProgressLoading } from '../ProgressLoading';
-import style from './style.module.less';
+import { LayoutContent } from '../LayoutContent/LayoutContent';
+import { LayoutHeader } from '../LayoutHeader/LayoutHeader';
+import { LayoutFooter } from '../LayoutFooter/LayoutFooter';
 
 
 const links = [
