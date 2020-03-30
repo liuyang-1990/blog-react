@@ -1,0 +1,93 @@
+.plinks {
+    clear   : both;
+    overflow: hidden;
+
+    li {
+        float: left;
+
+        a {
+            display    : block;
+            padding    : 0 10px;
+            height     : 38px;
+            line-height: 38px;
+            overflow   : hidden;
+            border     : 1px solid #EAEAEA;
+            margin     : 10px 10px 3px 8px;
+            color      : #555;
+
+            &:hover {
+                border-color                      : #3399CC;
+                color                             : #3399CC;
+                -webkit-transform                 : scale(1.05);
+                transform                         : scale(1.05);
+                -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+                transition-timing-function        : cubic-bezier(0.47, 2.02, 0.31, -0.36);
+            }
+        }
+    }
+}
+
+.ptags {
+    li {
+        a {
+            background: #EEE;
+        }
+
+        span {
+            background-color: #999;
+        }
+    }
+
+}
+
+.widget {
+    border-radius: 4px;
+    border       : 1px solid #eaeaea;
+    margin-bottom: 15px;
+    clear        : both;
+    position     : relative;
+    overflow     : hidden;
+}
+
+.widget_hot {
+    li {
+        a {
+            padding      : 10px 15px 10px 150px;
+            color        : #888;
+            border-bottom: solid 1px #eee;
+            overflow     : hidden;
+            position     : relative;
+            display      : block;
+            font-size    : 14px;
+
+            &:hover {
+                background-color                  : #FBFDFF;
+                -webkit-transform                 : scale(1.05);
+                transform                         : scale(1.05);
+                -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+                transition-timing-function        : cubic-bezier(0.47, 2.02, 0.31, -0.36);
+
+                .text {
+                    color: #3399CC;
+                }
+            }
+        }
+    }
+
+    .thumbnail {
+        float        : left;
+        margin-left  : -135px;
+        border       : none;
+        margin-bottom: 0;
+        padding      : 4px;
+
+        img {
+            width : 122px;
+            height: 86px;
+        }
+    }
+
+    .text {
+        display: block;
+    }
+}

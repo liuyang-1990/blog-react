@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react';
-import { Row, Col, Tooltip, Avatar, Card } from 'antd';
+import React, { useContext } from 'react';
+import { Row, Col, Tooltip, Avatar } from 'antd';
 import cn from 'classnames';
 import { DarkIcon, DefaultIcon } from '../ThemeIcon';
 import { ThemeContext } from '../../context';
+import { SiderBar } from '../Sidebar/SiderBar';
 import './style.less';
+
 
 
 export const LayoutContent = (props) => {
@@ -17,7 +19,7 @@ export const LayoutContent = (props) => {
     return (
         <div className="main-wrapper">
             <Row>
-                <Col xxl={20} xl={19} lg={18} md={24} sm={24} xs={24}>
+                <Col xxl={18} xl={18} lg={18} md={24} sm={24} xs={24}>
                     <section className="main-container main-container-component">
                         {props.children}
                     </section>
@@ -38,15 +40,8 @@ export const LayoutContent = (props) => {
                         </Tooltip>
                     </div>
                 </Col>
-                <Col xxl={4} xl={5} lg={6} md={0} sm={0} xs={0} className="main-menu">
-                    <aside>
-                        <Card title="最新评论文章" style={{ marginBottom: '15px', borderRadius: '4px' }}>
-
-                        </Card>
-                        <Card title="友情链接">
-
-                        </Card>
-                    </aside>
+                <Col xxl={6} xl={6} lg={6} md={0} sm={0} xs={0} className="main-menu">
+                    <SiderBar {...props} />
                 </Col>
             </Row>
         </div>

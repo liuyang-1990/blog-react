@@ -21,51 +21,53 @@ const Article = props => {
     const [page, setPage] = useState(1);
     const [articles, setArticles] = useState<any>(defaultArticles);
 
-    useEffect(() => {
-        scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }, []);
-    let handleInfiniteOnLoad = useCallback(page => {
-        setPage(page);
+    // useEffect(() => {
+    //     scrollTo({
+    //         top: 0,
+    //         behavior: "smooth"
+    //     });
+    // }, []);
+
+    const handleInfiniteOnLoad = () => {
+        let current = Math.ceil(articles.length / 10);
         console.log(page);
-        if (page > 3) {
+        if (current > 3) {
             return;
         }
         setLoading(true);
-        httpClient.get('https://randomuser.me/api/?results=20', {
+        httpClient.get('https://randomuser.me/api/?results=10', {
             baseURL: "",
             httpsAgent: new https.Agent({ rejectUnauthorized: false })
         }).then(res => {
             setLoading(false);
-            setArticles(articles => [...articles, ...res.data.results]);
+            setPage(current);
+            let data = articles.concat(res.data.results);
+            setArticles(data);
         });
-    }, []);
+    }
 
     const onLoadMore = (e) => {
-        if (page >= 5) {
-            setHasMore(false);
-            return;
-        }
+        let current = Math.ceil(articles.length / 10);
         e.preventDefault();
         setLoading(true);
         httpClient.get('https://randomuser.me/api/?results=20', {
             baseURL: "",
             httpsAgent: new https.Agent({ rejectUnauthorized: false })
         }).then(res => {
-            setPage(page);
+            setPage(current);
             setLoading(false);
-            setArticles(articles => [...articles, ...res.data.results]);
+            let data = articles.concat(res.data.results);
+            setHasMore(data.length <= total);
+            setArticles(data);
         });
     }
     return (
         <React.Fragment>
             <InfiniteScroll
-                initialLoad={false}
+                initialLoad={true}
                 pageStart={1}
                 loadMore={handleInfiniteOnLoad}
-                hasMore={!loading && hasMore}
+                hasMore={page <= 3}
                 useWindow={true}
             >
                 {
@@ -105,7 +107,7 @@ const Article = props => {
                 </div>
             )}
             {
-                page >= 3 && !loading &&
+                page >= 3 && !loading && hasMore &&
                 <div className="ias_trigger">
                     <a href="#" onClick={onLoadMore}>查看更多</a>
                 </div>
