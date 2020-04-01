@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Row, Col, Tooltip, Avatar } from 'antd';
 import cn from 'classnames';
 import { DarkIcon, DefaultIcon } from '../ThemeIcon';
 import { ThemeContext } from '../../context';
 import { SiderBar } from '../Sidebar/SiderBar';
 import './style.less';
-
-
 
 export const LayoutContent = (props) => {
     const { theme, setSiteTheme } = useContext(ThemeContext);
@@ -15,7 +13,6 @@ export const LayoutContent = (props) => {
         const nextTheme = theme !== 'dark' ? 'dark' : 'default';
         setSiteTheme(nextTheme);
     }
-
     return (
         <div className="main-wrapper">
             <Row>
