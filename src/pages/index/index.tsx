@@ -1,8 +1,8 @@
-import React, { FC, useState, useCallback, useEffect } from 'react';
-import { Spin, Divider } from 'antd';
+import React, { useState, useEffect } from 'react';
 import Link from "next/link";
 import { MessageOutlined, EyeOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { httpClient } from '../../utils';
+import { InfiniteScroll } from '../../components';
 import "./index.less";
 const https = require('https');
 
@@ -44,29 +44,6 @@ const Article = props => {
         });
     }
 
-    useEffect(() => {
-        let options = {
-            root: document.querySelector("main-container"),
-        };
-        let intersectionObserver = new IntersectionObserver(
-            function (entries) {
-                // 如果不可见，就返回
-                if (entries[0].intersectionRatio <= 0) return;
-                if (loading) return;
-                if (page >= 3) {
-                    intersectionObserver.unobserve(document.querySelector('footer'));
-                    return;
-                }
-                loadMore();
-            });
-
-        // 开始观察
-        intersectionObserver.observe(
-            document.querySelector('footer')
-        );
-        return () => intersectionObserver.disconnect();
-    });
-
     const query = (selector: string): Element[] => {
         return Array.from(document.querySelectorAll(selector));
     }
@@ -91,18 +68,29 @@ const Article = props => {
         return () => observer.disconnect();
     });
     return (
-        <React.Fragment>
+        <InfiniteScroll
+            loadMore={loadMore}
+            pageIndex={page}
+            hasMore={hasMore}
+            loading={loading}
+        >
             {
                 articles &&
                 articles.map((item, index) => (
                     <article key={item.login.uuid} className={`excerpt excerpt-${index + 1}`}>
-                        <a className="focus" href="http://www.muzhuangnet.com/show/1258.html" title="C# 字符串长度区分中英文截取">
-                            <img className="thumb" data-src="http://www.muzhuangnet.com/upload/201610/20/201610201731443264.jpg" alt="字符串长度区分中英文截取" style={{ display: "inlie" }} />
-                        </a>
+                        <Link href="/article/:id" as={`/article/${index}`} prefetch={false}>
+                            <a className="focus" title="C# 字符串长度区分中英文截取">
+                                <img className="thumb" data-src="http://www.muzhuangnet.com/upload/201610/20/201610201731443264.jpg" alt="字符串长度区分中英文截取" style={{ display: "inlie" }} />
+                            </a>
+                        </Link>
                         <header>
-                            <a className="cat" href="http://www.muzhuangnet.com/list/dotnet/" title=".NET" >.NET<i></i></a>
+                            <Link href="http://www.muzhuangnet.com/list/dotnet/" prefetch={false}>
+                                <a className="cat" title=".NET" >.NET<i></i></a>
+                            </Link>
                             <h2>
-                                <a href="http://www.muzhuangnet.com/show/1257.html" title="C# 字符串长度区分中英文截取">C# 字符串长度区分中英文截取</a>
+                                <Link href="/article/:id" as={`/article/${index}`} prefetch={false}>
+                                    <a title="C# 字符串长度区分中英文截取">C# 字符串长度区分中英文截取</a>
+                                </Link>
                             </h2>
                         </header>
                         <p className="meta">
@@ -112,31 +100,19 @@ const Article = props => {
                             <span className="views">
                                 <IconText icon={EyeOutlined} text="156" key="list-vertical-views" />
                             </span>
-                            <a className="comment" href="http://www.muzhuangnet.com/show/1257.html#comment" title="评论">
-                                <IconText icon={MessageOutlined} text="2" key="list-vertical-comment" />
-                            </a>
+                            <Link href="/article/:id#comment" as={`/article/${index}#comment`} prefetch={false}>
+                                <a className="comment" title="评论">
+                                    <IconText icon={MessageOutlined} text="2" key="list-vertical-comment" />
+                                </a>
+                            </Link>
                         </p>
                         <p className="note">
                             #region   字符串长度区分中英文截取/// &lt;summary&gt;   /// 截取文本，区分中英文字符，中文算两个长度，英文算一个长度/// &lt;/summary&gt;/// &lt;param name="str"&gt;待截取的字符串&lt;/param&gt;/// &lt;param name="length"&gt;需计算长度的字…
-                            </p>
+                        </p>
                     </article>
                 ))
             }
-            {
-                loading && hasMore && <div className="loading-container">
-                    <Spin />
-                </div>
-            }
-            {
-                page >= 3 && !loading && hasMore && <div className="ias_trigger">
-                    <a href="#" onClick={loadMore}>查看更多</a>
-                </div>
-            }
-            {
-                !hasMore &&
-                <Divider dashed={true}>我也是有底线的</Divider>
-            }
-        </React.Fragment>
+        </InfiniteScroll>
     )
 };
 
