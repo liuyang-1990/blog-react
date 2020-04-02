@@ -51,6 +51,7 @@
     "react-dom": "^16.13.0",
     "react-github-button": "^0.1.11",
     "react-infinite-scroller": "^1.2.4",
+    "react-lazyload": "^2.6.7",
     "theme-switcher": "^1.0.2"
   },
   "devDependencies": {

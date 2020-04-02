@@ -7,4 +7,4 @@ export { ProgressLoading } from './ProgressLoading';
 export { DarkIcon, DefaultIcon } from "./ThemeIcon";
 export { Signup } from "./SignupForm";
 export { SiderBar } from "./Sidebar/SiderBar";
-export { InfiniteScroll } from "./InfiniteScroll/infinitescroll";
+export { InfiniteScroll } from "./InfiniteScroll/Infinitescroll";

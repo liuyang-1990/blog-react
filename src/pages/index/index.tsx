@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Link from "next/link";
+import React, { useState } from 'react';
+import Link from 'next/link';
 import { MessageOutlined, EyeOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { httpClient } from '../../utils';
 import { InfiniteScroll } from '../../components';
+import LazyLoad from 'react-lazyload';
 import "./index.less";
 const https = require('https');
 
@@ -26,6 +27,27 @@ const Article = props => {
     //         behavior: "smooth"
     //     });
     // }, []);
+    // useEffect(() => {
+    //     let observer = new IntersectionObserver(
+    //         function (entries) {
+    //             entries.forEach((item) => {
+    //                 // 当前元素可见
+    //                 let container = item.target as HTMLImageElement;
+    //                 if (item.isIntersecting) {
+    //                     container.src = container.dataset.src  // 替换src
+    //                     observer.unobserve(item.target)  // 停止观察当前元素 避免不可见时候再次调用callback函数
+    //                 }
+    //             })
+    //         }
+    //     );
+
+    //     query('[data-src]').forEach(function (item) {
+    //         observer.observe(item);
+    //     });
+
+    //     return () => observer.disconnect();
+    // });
+
 
     const loadMore = (e?) => {
         e?.preventDefault();
@@ -35,38 +57,14 @@ const Article = props => {
             httpsAgent: new https.Agent({ rejectUnauthorized: false })
         }).then(res => {
             let data = articles.concat(res.data.results);
-            setArticles(data);
             let current = Math.ceil(data.length / 10);
+            setArticles(data);
             setHasMore(data.length < total);
             setPage(current);
-            console.log(current);
             setLoading(false);
         });
     }
 
-    const query = (selector: string): Element[] => {
-        return Array.from(document.querySelectorAll(selector));
-    }
-
-    useEffect(() => {
-        let observer = new IntersectionObserver(
-            function (entries) {
-                entries.forEach((item) => {
-                    // 当前元素可见
-                    let container = item.target as HTMLImageElement;
-                    if (item.isIntersecting) {
-                        container.src = container.dataset.src  // 替换src
-                        observer.unobserve(item.target)  // 停止观察当前元素 避免不可见时候再次调用callback函数
-                    }
-                })
-            }
-        );
-        query('[data-src]').forEach(function (item) {
-            observer.observe(item);
-        });
-
-        return () => observer.disconnect();
-    });
     return (
         <InfiniteScroll
             loadMore={loadMore}
@@ -80,7 +78,9 @@ const Article = props => {
                     <article key={item.login.uuid} className={`excerpt excerpt-${index + 1}`}>
                         <Link href="/article/:id" as={`/article/${index}`} prefetch={false}>
                             <a className="focus" title="C# 字符串长度区分中英文截取">
-                                <img className="thumb" data-src="http://www.muzhuangnet.com/upload/201610/20/201610201731443264.jpg" alt="字符串长度区分中英文截取" style={{ display: "inlie" }} />
+                                <LazyLoad offset={100} once>
+                                    <img className="thumb" src="http://www.muzhuangnet.com/upload/201610/20/201610201731443264.jpg" alt="字符串长度区分中英文截取" style={{ display: "inlie" }} />
+                                </LazyLoad>
                             </a>
                         </Link>
                         <header>

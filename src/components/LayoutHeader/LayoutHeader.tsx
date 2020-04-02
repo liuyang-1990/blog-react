@@ -111,7 +111,7 @@ export const LayoutHeader = () => {
                 <Col {...colProps[0]}>
                     <h1>
                         <a href={"/"} id="logo">
-                            <img alt="logo" title="liuyang's blog" data-src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
+                            <img alt="logo" title="liuyang's blog" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
                             liuyang's blog
                         </a>
                     </h1>
