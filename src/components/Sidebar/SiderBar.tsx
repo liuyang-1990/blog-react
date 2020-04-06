@@ -1,9 +1,23 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Card } from 'antd';
+import 'intersection-observer';
 import "./style.less";
 
 const SiderBar = props => {
+    useEffect(() => {
+        let fixedBar = document.querySelector(".sidebar .fixed");
+        let observer = new IntersectionObserver(entries => {
+            if (entries[0].intersectionRatio <= 0) {
+                fixedBar.setAttribute("style", "position:fixed;top:84px");
+            } else {
+                fixedBar.removeAttribute("style");
+            }
 
+        });
+        // 开始观察
+        observer.observe(document.querySelector('.sidebar'));
+        return () => observer.disconnect();
+    }, []);
     return (
         <aside className="sidebar">
             <div className="fixed">

@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react';
 import { Spin } from 'antd';
-require('intersection-observer');
 import './style.less';
 
 type Props = {

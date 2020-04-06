@@ -6,6 +6,7 @@ import { SiteContext } from '../../context';
 import cn from 'classnames';
 import GitHubButton from 'react-github-button';
 import './style.less';
+import Link from 'next/link';
 
 export const LayoutHeader = () => {
 
@@ -73,7 +74,6 @@ export const LayoutHeader = () => {
         menu = searching ? [] : menu;
     }
     const colProps =
-        // isHome? [{ flex: 'none' }, { flex: 'auto' }]  :
         [
             {
                 xxl: 4,
@@ -93,36 +93,41 @@ export const LayoutHeader = () => {
             },
         ];
     return (
-        <header id="header" className={headerClassName}>
-            {isMobile && (
-                <Popover
-                    overlayClassName="popover-menu"
-                    placement="bottomRight"
-                    content={menu}
-                    trigger="click"
-                    visible={menuVisible}
-                    onVisibleChange={onMenuVisibleChange}
-                    arrowPointAtCenter
-                >
-                    <UnorderedListOutlined className="nav-phone-icon" onClick={handleShowMenu} />
-                </Popover>
-            )}
-            <Row style={{ flexFlow: 'nowrap' }}>
-                <Col {...colProps[0]}>
-                    <h1>
-                        <a href={"/"} id="logo">
-                            <img alt="logo" title="liuyang's blog" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
-                            liuyang's blog
-                        </a>
-                    </h1>
-                </Col>
-                <Col {...colProps[1]} className="menu-row">
-                    <SearchBox key="search" responsive={responsive} onTriggerFocus={onTriggerSearching} />
-                    {!isMobile && menu}
-                </Col>
-            </Row>
-        </header >
-
+        <header className="header">
+            <div className="navbar">
+                <div className="contanier">
+                    {isMobile && (
+                        <Popover
+                            overlayClassName="popover-menu"
+                            placement="bottomRight"
+                            content={menu}
+                            trigger="click"
+                            visible={menuVisible}
+                            onVisibleChange={onMenuVisibleChange}
+                            arrowPointAtCenter
+                        >
+                            <UnorderedListOutlined className="nav-phone-icon" onClick={handleShowMenu} />
+                        </Popover>
+                    )}
+                    <Row style={{ flexFlow: 'nowrap' }}>
+                        <Col {...colProps[0]}>
+                            <h1>
+                                <Link href="/">
+                                    <a id="logo">
+                                        <img alt="logo" title="liuyang's blog" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
+                                        liuyang's blog
+                                    </a>
+                                </Link>
+                            </h1>
+                        </Col>
+                        <Col  {...colProps[1]} className="menu-row">
+                            <SearchBox key="search" responsive={responsive} onTriggerFocus={onTriggerSearching} />
+                            {!isMobile && menu}
+                        </Col>
+                    </Row>
+                </div>
+            </div>
+        </header>
     )
 
 };

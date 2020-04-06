@@ -1,12 +1,22 @@
 @import '~antd/lib/style/themes/default.less';
 @import '../../styles/theme.less';
 
-#header {
-  position  : relative;
-  z-index   : 10;
-  max-width : 100%;
-  background: @component-background;
-  box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
+.header {
+  display: block;
+  height : @header-height;
+
+  .navbar {
+    position  : fixed;
+    top       : 0;
+    z-index   : 22;
+    width     : 100%;
+    padding   : 0;
+    height    : @header-height;
+    background: @component-background;
+    box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
+    border    : none;
+  }
+
 
   .menu-row {
     display    : flex;
@@ -16,23 +26,9 @@
     >* {
       flex  : none;
       margin: 0 16px 0 0;
-
-      &:last-child {
-        margin-right: 40px;
-      }
-    }
-  }
-
-  // Adjust github button style
-
-  .ant-row-rtl {
-    .menu-row {
-      >* {
-        &:last-child {
-          margin-right: 16px;
-          margin-left : 40px;
-        }
-      }
+      // &  :last-child {
+      //   margin-right: 40px;
+      // }
     }
   }
 
@@ -43,22 +39,24 @@
   }
 }
 
+
 @media only screen and (max-width: @mobile-max-width) {
-  #header {
+  .header {
     text-align: center;
   }
 }
 
 #logo {
-  height         : @header-height;
-  padding-left   : 40px;
-  overflow       : hidden;
-  color          : @site-heading-color;
-  font-size      : 18px;
-  font-family    : Avenir, @font-family, sans-serif;
-  line-height    : @header-height;
-  white-space    : nowrap;
-  text-decoration: none;
+  height            : @header-height;
+  // padding-left   : 40px;
+  overflow          : hidden;
+  color             : @site-heading-color;
+  font-size         : 18px;
+  font-family       : Avenir, @font-family, sans-serif;
+  line-height       : @header-height;
+  white-space       : nowrap;
+  text-decoration   : none;
+
 
   .ant-row-rtl & {
     float        : right;
@@ -71,6 +69,13 @@
     top         : -1.5px;
     height      : 32px;
     margin-right: 16px;
+
+    &:hover {
+      -webkit-transform                 : scale(1.05);
+      transform                         : scale(1.05);
+      -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+      transition-timing-function        : cubic-bezier(0.47, 2.02, 0.31, -0.36);
+    }
 
     .ant-row-rtl & {
       margin-right: 0;

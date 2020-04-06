@@ -1,7 +1,7 @@
 import App from 'next/app';
 import React from 'react';
 import { Spin } from 'antd';
-import { MasterPage } from '../components';
+import { MasterPage, ProgressLoading } from '../components';
 import { LoadingOutlined } from '@ant-design/icons';
 import { SiteContextProvider, ThemeProvider } from '../context';
 import '../styles/global.less';
@@ -27,6 +27,7 @@ class CustomApp extends App {
     return (
       <SiteContextProvider>
         <ThemeProvider>
+          <ProgressLoading />
           <MasterPage {...pageProps}>
             <Component {...pageProps} />
           </MasterPage>
