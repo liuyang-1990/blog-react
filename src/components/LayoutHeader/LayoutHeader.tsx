@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Row, Col, Popover, Button } from 'antd';
 import { UnorderedListOutlined } from '@ant-design/icons';
 import { SearchBox, Navigation } from './components';
+import { Signup } from "../SignupForm";
 import { SiteContext } from '../../context';
 import cn from 'classnames';
 import GitHubButton from 'react-github-button';
@@ -13,6 +14,7 @@ export const LayoutHeader = () => {
 
     const [searching, setSearching] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
+    const [signupVisible, setSignupVisible] = useState(false);
     const { isMobile, width, responsive } = useContext(SiteContext);
 
     function onTriggerSearching(searching: boolean) {
@@ -29,21 +31,23 @@ export const LayoutHeader = () => {
     function onMenuVisibleChange(visible: boolean) {
         setMenuVisible(visible);
     }
-    const headerClassName = cn({
-        clearfix: true,
-        //'home-header': isHome,
-    });
+
+    const handleClick = () => {
+        handleHideMenu();
+        setSignupVisible(true);
+    }
 
     const navigationNode = (
         <Navigation
             key="nav"
             responsive={responsive}
             isMobile={isMobile}
+            handleSignUpClick={handleClick}
         />
     );
 
-    let handleClick = () => {
-        //  window.location.href = "/signup";
+    const handleHideSignUp = () => {
+        setSignupVisible(false);
     }
 
     let menu: (React.ReactElement | null)[] = [
@@ -92,41 +96,45 @@ export const LayoutHeader = () => {
             },
         ];
     return (
-        <header id="header" className="header">
-            <div className="navbar">
-                <div className="contanier">
-                    {isMobile && (
-                        <Popover
-                            overlayClassName="popover-menu"
-                            placement="bottomRight"
-                            content={menu}
-                            trigger="click"
-                            visible={menuVisible}
-                            onVisibleChange={onMenuVisibleChange}
-                            arrowPointAtCenter
-                        >
-                            <UnorderedListOutlined className="nav-phone-icon" onClick={handleShowMenu} />
-                        </Popover>
-                    )}
-                    <Row style={{ flexFlow: 'nowrap' }}>
-                        <Col {...colProps[0]}>
-                            <h1>
-                                <Link href="/" prefetch={false}>
-                                    <a id="logo" title="liuyang's blog">
-                                        <img alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
+        <>
+            <header id="header" className="header">
+                <div className="navbar">
+                    <div className="contanier">
+                        {isMobile && (
+                            <Popover
+                                overlayClassName="popover-menu"
+                                placement="bottomRight"
+                                content={menu}
+                                trigger="click"
+                                visible={menuVisible}
+                                onVisibleChange={onMenuVisibleChange}
+                                arrowPointAtCenter
+                            >
+                                <UnorderedListOutlined className="nav-phone-icon" onClick={handleShowMenu} />
+                            </Popover>
+                        )}
+                        <Row style={{ flexFlow: 'nowrap' }}>
+                            <Col {...colProps[0]}>
+                                <h1>
+                                    <Link href="/" prefetch={false}>
+                                        <a id="logo" title="liuyang's blog">
+                                            <img alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
                                         liuyang's blog
                                     </a>
-                                </Link>
-                            </h1>
-                        </Col>
-                        <Col  {...colProps[1]} className="menu-row">
-                            <SearchBox key="search" responsive={responsive} onTriggerFocus={onTriggerSearching} />
-                            {!isMobile && menu}
-                        </Col>
-                    </Row>
+                                    </Link>
+                                </h1>
+                            </Col>
+                            <Col  {...colProps[1]} className="menu-row">
+                                <SearchBox key="search" responsive={responsive} onTriggerFocus={onTriggerSearching} />
+                                {!isMobile && menu}
+                            </Col>
+                        </Row>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+            <Signup visible={signupVisible} onCancel={handleHideSignUp} />
+        </>
+
     )
 
 };

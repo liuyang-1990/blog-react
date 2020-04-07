@@ -15,9 +15,10 @@ import './Navigation.less';
 type Props = {
     isMobile: boolean;
     responsive: null | 'narrow' | 'crowded';
+    handleSignUpClick?: () => void;
 }
 
-let Navigation: FC<Props> = ({ isMobile, responsive }) => {
+let Navigation: FC<Props> = ({ isMobile, responsive, handleSignUpClick }) => {
     const menuMode = isMobile ? 'inline' : 'horizontal';
     let additional: React.ReactNode = null;
     const additionalItems = [
@@ -31,7 +32,7 @@ let Navigation: FC<Props> = ({ isMobile, responsive }) => {
         <Menu.Item key="signin" >
             登录
         </Menu.Item>,
-        <Menu.Item key="signup" >
+        <Menu.Item key="signup" onClick={handleSignUpClick} >
             注册
         </Menu.Item>,
     ];
