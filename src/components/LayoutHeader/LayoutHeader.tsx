@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Row, Col, Popover, Button } from 'antd';
-import { UnorderedListOutlined, LoginOutlined } from '@ant-design/icons';
+import { UnorderedListOutlined } from '@ant-design/icons';
 import { SearchBox, Navigation } from './components';
 import { SiteContext } from '../../context';
 import cn from 'classnames';
 import GitHubButton from 'react-github-button';
-import './style.less';
 import Link from 'next/link';
+import './style.less';
+
 
 export const LayoutHeader = () => {
 
@@ -42,7 +43,7 @@ export const LayoutHeader = () => {
     );
 
     let handleClick = () => {
-        window.location.href = "/signup";
+        //  window.location.href = "/signup";
     }
 
     let menu: (React.ReactElement | null)[] = [
@@ -59,11 +60,9 @@ export const LayoutHeader = () => {
             repo="blog-react"
         />,
         <Button size="small" key="signin" className="header-button header-signin-button">
-            <LoginOutlined />
             登录
         </Button>,
         <Button size="small" key="signup" className="header-button header-signup-button" onClick={handleClick}>
-            <LoginOutlined />
             注册
        </Button>
     ];

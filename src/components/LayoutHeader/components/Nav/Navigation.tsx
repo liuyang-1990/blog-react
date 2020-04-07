@@ -5,11 +5,11 @@ import {
     EditOutlined,
     FolderOutlined,
     UserOutlined,
-    LoginOutlined,
-    GithubOutlined,
     UnorderedListOutlined
 } from '@ant-design/icons';
+import Link from 'next/link';
 import './Navigation.less';
+
 
 
 type Props = {
@@ -22,17 +22,16 @@ let Navigation: FC<Props> = ({ isMobile, responsive }) => {
     let additional: React.ReactNode = null;
     const additionalItems = [
         <Menu.Item key="github">
-            <GithubOutlined />
-            <a href="https://github.com/liuyang-1990/blog-react" target="_blank" rel="noopener noreferrer">
-                Github
-            </a>
+            <Link href="https://github.com/liuyang-1990/blog-react" prefetch={false}>
+                <a target="_blank" rel="noopener noreferrer">
+                    Github
+                </a>
+            </Link>
         </Menu.Item>,
         <Menu.Item key="signin" >
-            <LoginOutlined />
             登录
         </Menu.Item>,
         <Menu.Item key="signup" >
-            <LoginOutlined />
             注册
         </Menu.Item>,
     ];

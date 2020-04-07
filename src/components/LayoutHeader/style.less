@@ -37,10 +37,10 @@
     >* {
       flex  : none;
       margin: 0 16px 0 0;
-    }
 
-    & :last-child {
-      margin-right: 0;
+      // & :last-child {
+      //   margin-right: 40px;
+      // }
     }
   }
 
@@ -48,6 +48,10 @@
   .header-button {
     color       : @text-color;
     border-color: @border-color-base;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 
@@ -74,7 +78,7 @@
   line-height       : @header-height;
   white-space       : nowrap;
   text-decoration   : none;
-
+  user-select       : none;
 
   .ant-row-rtl & {
     float        : right;
