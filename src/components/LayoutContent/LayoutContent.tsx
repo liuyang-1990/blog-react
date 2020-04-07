@@ -17,7 +17,7 @@ export const LayoutContent = (props) => {
         <section className="contanier">
             <div className="content-wrap">
                 <Row>
-                    <Col xxl={18} xl={18} lg={24} md={24} sm={24} xs={24}>
+                    <Col xxl={17} xl={17} lg={24} md={24} sm={24} xs={24}>
                         <div className="content">
                             {props.children}
                         </div>
@@ -38,7 +38,7 @@ export const LayoutContent = (props) => {
                             </Tooltip>
                         </div>
                     </Col>
-                    <Col xxl={6} xl={6} lg={0} md={0} sm={0} xs={0} className="main-menu">
+                    <Col xxl={7} xl={7} lg={0} md={0} sm={0} xs={0} className="main-menu">
                         <SiderBar {...props} />
                     </Col>
                 </Row>

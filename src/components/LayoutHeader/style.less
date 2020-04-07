@@ -15,6 +15,17 @@
     background: @component-background;
     box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
     border    : none;
+
+    .nav-phone-icon {
+      position: absolute;
+      top     : 25px;
+      right   : 30px;
+      z-index : 1;
+      display : none;
+      width   : 16px;
+      height  : 22px;
+      cursor  : pointer;
+    }
   }
 
 
@@ -26,9 +37,10 @@
     >* {
       flex  : none;
       margin: 0 16px 0 0;
-      // &  :last-child {
-      //   margin-right: 40px;
-      // }
+    }
+
+    & :last-child {
+      margin-right: 0;
     }
   }
 
@@ -43,6 +55,12 @@
 @media only screen and (max-width: @mobile-max-width) {
   .header {
     text-align: center;
+
+    .navbar {
+      .nav-phone-icon {
+        display: block;
+      }
+    }
   }
 }
 

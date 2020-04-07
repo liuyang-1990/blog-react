@@ -1,3 +1,5 @@
+@import '~antd/lib/style/themes/default.less';
+
 .contanier {
     position : relative;
     margin   : 0 auto;
@@ -20,6 +22,22 @@
 
 .main-menu {
     padding-left: 15px;
+    z-index     : 1;
+
+    &-inner {
+        height    : 100%;
+        max-height: 100vh;
+        overflow  : hidden;
+    }
+
+    &:hover &-inner {
+        overflow-y: auto;
+    }
+
+    >div,
+    >div>div {
+        height: 100%;
+    }
 }
 
 @media only screen and (max-width: 1240px) {
@@ -32,5 +50,29 @@
 @media only screen and (max-width: 480px) {
     .contanier {
         margin: 0 10px;
+    }
+}
+
+
+.fixed-widgets {
+    position: fixed;
+    right   : 32px;
+    bottom  : 102px;
+    z-index : 2147483640;
+    cursor  : pointer;
+
+    &-tooltip {
+        .ant-tooltip-inner {
+            min-width: 100px;
+        }
+    }
+
+    &>div {
+        display: block;
+    }
+
+    & &-avatar {
+        background-color: #fff;
+        box-shadow      : @shadow-2;
     }
 }

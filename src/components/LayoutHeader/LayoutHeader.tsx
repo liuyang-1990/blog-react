@@ -55,8 +55,8 @@ export const LayoutHeader = () => {
                 [`responsive-${responsive}`]: responsive,
             })}
             type="stargazers"
-            namespace="ant-design"
-            repo="ant-design"
+            namespace="liuyang-1990"
+            repo="blog-react"
         />,
         <Button size="small" key="signin" className="header-button header-signin-button">
             <LoginOutlined />
@@ -93,7 +93,7 @@ export const LayoutHeader = () => {
             },
         ];
     return (
-        <header className="header">
+        <header id="header" className="header">
             <div className="navbar">
                 <div className="contanier">
                     {isMobile && (
@@ -112,9 +112,9 @@ export const LayoutHeader = () => {
                     <Row style={{ flexFlow: 'nowrap' }}>
                         <Col {...colProps[0]}>
                             <h1>
-                                <Link href="/">
-                                    <a id="logo">
-                                        <img alt="logo" title="liuyang's blog" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
+                                <Link href="/" prefetch={false}>
+                                    <a id="logo" title="liuyang's blog">
+                                        <img alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
                                         liuyang's blog
                                     </a>
                                 </Link>

@@ -4,7 +4,7 @@ import { GithubOutlined, CopyrightOutlined } from '@ant-design/icons';
 import { LayoutContent } from '../LayoutContent/LayoutContent';
 import { LayoutHeader } from '../LayoutHeader/LayoutHeader';
 import { LayoutFooter } from '../LayoutFooter/LayoutFooter';
-
+import './style.less';
 
 const links = [
     {
