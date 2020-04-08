@@ -11,7 +11,7 @@ const nextPage = ({ router }) => {
                     <div className='signup-box'>
                         <h2 className='title'>Sign Up</h2>
                         <div className='signup-form'>
-                            <Signup />
+                           
                         </div>
                     </div>
                 </div>
