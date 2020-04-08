@@ -1,12 +1,8 @@
 import App from 'next/app';
 import React from 'react';
-import { Spin } from 'antd';
 import { MasterPage, ProgressLoading } from '../components';
-import { LoadingOutlined } from '@ant-design/icons';
 import { SiteContextProvider, ThemeProvider } from '../context';
 import '../styles/global.less';
-
-Spin.setDefaultIndicator(<LoadingOutlined spin style={{ fontSize: '180%', marginTop: 30 }} />);
 
 class CustomApp extends App {
 
