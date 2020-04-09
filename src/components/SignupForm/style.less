@@ -8,55 +8,48 @@
     width  : 100%;
 }
 
-// .wrapper {
-//     .form-row {
-//         input {
-//             height: @element-hegith;
-//         }
-//     }
+.other {
+    margin-top : 24px;
+    line-height: 22px;
+    text-align : left;
+}
 
-//     .ant-input-affix-wrapper-lg {
-//         padding: 0 11px;
-//     }
+.icon {
+    margin-left   : 16px;
+    color         : @text-color-secondary;
+    font-size     : 24px;
+    vertical-align: middle;
+    cursor        : pointer;
+    transition    : color 0.3s;
 
-//     .ant-input-suffix {
-//         line-height: 45px;
-//     }
+    &:hover {
+        color: @primary-color;
+    }
+}
 
-//     .button-row {
-//         button {
-//             height      : @element-hegith;
-//             margin-right: 16px;
+.success,
+.warning,
+.error {
+  transition: color 0.3s;
+}
 
-//             &:last-child {
-//                 margin-right: 0;
-//             }
+.success {
+  color: @success-color;
+}
 
-//             span {
-//                 @widht: 40px;
+.warning {
+  color: @warning-color;
+}
 
-//                 padding-left : @widht;
-//                 padding-right: @widht;
-//             }
-//         }
+.error {
+  color: @error-color;
+}
 
-//     }
-
-
-//     .forget-row {
-//         margin-top: 15px;
-//         text-align: center;
-//         color     : #888;
-//         font-size : 80%;
-
-//         a {
-//             color: #aaa;
-//         }
-//     }
-
-//     .register-row {
-//         margin-top: 70px;
-//         text-align: center;
-//         font-size : 90%;
-//     }
-// }
+.progress-pass > .progress {
+    :global {
+      .ant-progress-bg {
+        background-color: @warning-color;
+      }
+    }
+  }
+  
