@@ -83,7 +83,7 @@ const Signup: FC<Props> = ({ visible, onCancel }) => {
                     {other}
                 </TabPane>
                 <TabPane tab="注册" key="2">
-                    <Register onFinish={onFinish} submitting={submitting} />
+                    <Register />
                     {other}
                 </TabPane>
             </Tabs>

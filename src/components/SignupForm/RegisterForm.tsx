@@ -1,15 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Form, Row, Col, Input, Button, Popover, Progress } from 'antd';
+import { Form, Row, Col, Input, Button } from 'antd';
+import { httpClient } from '../../utils';
 
 type Props = {
-    onFinish: (values) => void;
-    submitting: boolean;
+    submitting?: boolean;
 }
 
-const Register: FC<Props> = ({ onFinish, submitting }) => {
+const Register: FC<Props> = ({ submitting }) => {
     const [count, setcount] = useState(0);
-    const [visible, setvisible] = useState(false);
-    const [popover, setpopover] = useState(false);
     const [form] = Form.useForm();
 
     let interval: number | undefined;
@@ -26,59 +24,25 @@ const Register: FC<Props> = ({ onFinish, submitting }) => {
         }, 1000);
     };
 
+    const onFinish = (values: { [key: string]: string }) => {
+        httpClient.post('/account/register', values)
+            .then(response => {
+                console.log(response);
+            }).catch(err => {
+                console.log(err);
+            });
+    }
+
     useEffect(
         () => () => {
             clearInterval(interval);
         },
         [],
     );
-    const passwordStatusMap = {
-        ok: (
-            <div className="success">
-                强度：强
-            </div>
-        ),
-        pass: (
-            <div className="warning">
-                强度：中
-            </div>
-        ),
-        poor: (
-            <div className="error">
-                强度：太短
-            </div>
-        ),
-    };
-
-    const passwordProgressMap: {
-        ok: 'success';
-        pass: 'normal';
-        poor: 'exception';
-    } = {
-        ok: 'success',
-        pass: 'normal',
-        poor: 'exception',
-    };
-    const getPasswordStatus = () => {
-        const value = form.getFieldValue('password');
-        if (value && value.length > 9) {
-            return 'ok';
-        }
-        if (value && value.length > 5) {
-            return 'pass';
-        }
-        return 'poor';
-    };
-
     const checkPassword = (_: any, value: string) => {
         if (!value) {
-            setvisible(!!value);
             return Promise.reject("请输入密码!");
         }
-        if (!visible) {
-            setvisible(!!value);
-        }
-        setpopover(!popover);
         if (value.length < 6) {
             return Promise.reject('');
         }
@@ -86,33 +50,15 @@ const Register: FC<Props> = ({ onFinish, submitting }) => {
     }
 
     const checkConfirm = (_: any, value: string) => {
-        if (!value || form.getFieldValue('password') === value) {
+        if (!value || form.getFieldValue('Password') === value) {
             return Promise.resolve();
         }
         return Promise.reject("两次输入的密码不匹配!");
     }
-
-    const renderPasswordProgress = () => {
-        const value = form.getFieldValue('password');
-        const passwordStatus = getPasswordStatus();
-        return value && value.length ? (
-            <div className={`progress-${passwordStatus}`}>
-                <Progress
-                    status={passwordProgressMap[passwordStatus]}
-                    className="progress"
-                    strokeWidth={6}
-                    percent={value.length * 10 > 100 ? 100 : value.length * 10}
-                    showInfo={false}
-                />
-            </div>
-        ) : null;
-    };
-
     return (
-
         <Form layout="vertical" form={form} name="register" onFinish={onFinish}>
             <Form.Item
-                name="name"
+                name="UserName"
                 rules={[
                     {
                         required: true,
@@ -121,27 +67,8 @@ const Register: FC<Props> = ({ onFinish, submitting }) => {
                 ]}>
                 <Input size="large" placeholder="用户名" />
             </Form.Item>
-            <Popover
-                getPopupContainer={(node) => {
-                    if (node && node.parentNode) {
-                        return node.parentNode as HTMLElement;
-                    }
-                    return node;
-                }}
-                content={
-                    visible && (
-                        <div style={{ padding: '4px 0' }}>
-                            {passwordStatusMap[getPasswordStatus()]}
-                            {renderPasswordProgress()}
-                        </div>
-                    )
-                }
-                overlayStyle={{ width: 240 }}
-                placement="right"
-                visible={visible}
-            ></Popover>
             <Form.Item
-                name="password"
+                name="Password"
                 rules={[
                     {
                         validator: checkPassword,
@@ -161,12 +88,12 @@ const Register: FC<Props> = ({ onFinish, submitting }) => {
                         validator: checkConfirm
                     }
                 ]}
-                dependencies={['password']}
+                dependencies={['Password']}
             >
                 <Input.Password size="large" placeholder="确认密码" />
             </Form.Item>
             <Form.Item
-                name="email"
+                name="Email"
                 rules={[
                     {
                         required: true,
@@ -205,10 +132,10 @@ const Register: FC<Props> = ({ onFinish, submitting }) => {
                 </Col>
             </Row>
             <Button
-                className='button-login'
-                loading={submitting}
-                size="large"
                 type="primary"
+                size="large"
+                loading={submitting}
+                className='button-login'
                 htmlType="submit"
                 block
             >
