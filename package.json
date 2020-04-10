@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint \"{src,apps,libs,test}/**/*.{ts,js,tsx,jsx}\" --fix",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" \"test/**/*.{ts,tsx,js,jsx}\"",
+    "lint": "eslint src --fix --ext .ts,.tsx",
     "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node dist/index.js"
@@ -66,6 +65,8 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
     "nodemon": "^2.0.2",
     "null-loader": "^3.0.0",
     "prettier": "^2.0.2",
