@@ -2,35 +2,34 @@ import React, { FC, useEffect, useState } from 'react';
 import { Form, Row, Col, Input, Button } from 'antd';
 import { httpClient } from '../../utils';
 
-type Props = {
-    submitting?: boolean;
-}
-
-const Register: FC<Props> = ({ submitting }) => {
-    const [count, setcount] = useState(0);
+const Register: FC = () => {
+    const [count, setCount] = useState(0);
+    const [submitting, setSubmitting] = useState(false);
     const [form] = Form.useForm();
 
     let interval: number | undefined;
 
     const onGetCaptcha = () => {
         let counts = 59;
-        setcount(counts);
+        setCount(counts);
         interval = window.setInterval(() => {
             counts -= 1;
-            setcount(counts);
+            setCount(counts);
             if (counts === 0) {
                 clearInterval(interval);
             }
         }, 1000);
     };
 
-    const onFinish = (values: { [key: string]: string }) => {
-        httpClient.post('/account/register', values)
-            .then(response => {
-                console.log(response);
-            }).catch(err => {
-                console.log(err);
-            });
+    const onFinish = async (values: { [key: string]: string }) => {
+        setSubmitting(true);
+        try {
+            const res = await httpClient.post('/v1/account/register', values);
+            console.log(res)
+            setSubmitting(false);
+        } catch (err) {
+            setSubmitting(false);
+        }
     }
 
     useEffect(
