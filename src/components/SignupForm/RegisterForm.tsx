@@ -1,10 +1,16 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useContext } from 'react';
 import { Form, Row, Col, Input, Button } from 'antd';
-import { httpClient } from '../../utils';
+import { httpClient, login } from '../../utils';
+import { LoginContext } from '../../context';
 
-const Register: FC = () => {
+type Props = {
+    onCancel?: () => void;
+}
+
+const Register: FC<Props> = ({ onCancel }) => {
     const [count, setCount] = useState(0);
     const [submitting, setSubmitting] = useState(false);
+    const { setIsLogin } = useContext(LoginContext);
     const [form] = Form.useForm();
 
     let interval: number | undefined;
@@ -25,8 +31,12 @@ const Register: FC = () => {
         setSubmitting(true);
         try {
             const res = await httpClient.post('/v1/account/register', values);
-            console.log(res)
+            const { data } = res;
+            const { AccessToken, Expires, UserName } = data;
+            login({ token: `AccessToken:${AccessToken};UserName:${UserName}`, expires: Expires });
+            setIsLogin(true);
             setSubmitting(false);
+            onCancel && onCancel();
         } catch (err) {
             setSubmitting(false);
         }
@@ -134,7 +144,6 @@ const Register: FC = () => {
                 type="primary"
                 size="large"
                 loading={submitting}
-                className='button-login'
                 htmlType="submit"
                 block
             >

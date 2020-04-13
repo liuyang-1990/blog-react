@@ -3,9 +3,16 @@ import Router from 'next/router';
 import nextCookie from 'next-cookies';
 import cookie from 'js-cookie';
 
-export const login = ({ token }) => {
-    cookie.set('token', token, { expires: 1 })
-    Router.push('/profile')
+export const login = ({ token, expires = 1 }) => {
+    if (token) {
+        cookie.set('token', encodeURIComponent(token), { expires: expires });
+    }
+}
+
+export const logout = () => {
+    cookie.remove('token')
+    // to support logging out from all windows
+    window.localStorage.setItem('logout', Date.now().toString())
 }
 
 export const auth = ctx => {
@@ -24,12 +31,6 @@ export const auth = ctx => {
     return token
 }
 
-export const logout = () => {
-    cookie.remove('token')
-    // to support logging out from all windows
-    window.localStorage.setItem('logout', Date.now().toString())
-    Router.push('/login');
-}
 
 export const withAuthSync = WrappedComponent => {
     const Wrapper = props => {

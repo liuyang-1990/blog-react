@@ -29,11 +29,8 @@ let Navigation: FC<Props> = ({ isMobile, responsive, handleSignUpClick }) => {
                 </a>
             </Link>
         </Menu.Item>,
-        <Menu.Item key="signin" >
-            登录
-        </Menu.Item>,
         <Menu.Item key="signup" onClick={handleSignUpClick} >
-            注册
+            登录
         </Menu.Item>,
     ];
     if (isMobile) {

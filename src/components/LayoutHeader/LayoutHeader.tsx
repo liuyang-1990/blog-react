@@ -1,22 +1,24 @@
 import React, { useContext, useState } from 'react';
-import { Row, Col, Popover, Button } from 'antd';
-import { UnorderedListOutlined } from '@ant-design/icons';
+import { Row, Col, Popover, Dropdown, Button, Avatar, Menu } from 'antd';
+import { UnorderedListOutlined, LogoutOutlined } from '@ant-design/icons';
 import { SearchBox, Navigation } from './components';
 import { Signup } from "../SignupForm";
-import { SiteContext } from '../../context';
+import { SiteContext, LoginContext } from '../../context';
 import cn from 'classnames';
 import GitHubButton from 'react-github-button';
 import Link from 'next/link';
+import { logout } from '../../utils';
 import './style.less';
+
 
 
 export const LayoutHeader = () => {
 
     const [searching, setSearching] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
-    const [signupVisible, setSignupVisible] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
     const { isMobile, width, responsive } = useContext(SiteContext);
-
+    const { isLogin, setIsLogin, userName } = useContext(LoginContext);
     function onTriggerSearching(searching: boolean) {
         setSearching(searching);
     };
@@ -34,7 +36,7 @@ export const LayoutHeader = () => {
 
     const handleClick = () => {
         handleHideMenu();
-        setSignupVisible(true);
+        setModalVisible(true);
     }
 
     const navigationNode = (
@@ -46,10 +48,22 @@ export const LayoutHeader = () => {
         />
     );
 
-    const handleHideSignUp = () => {
-        setSignupVisible(false);
+    const handleCancel = () => {
+        setModalVisible(false);
     }
 
+    const handleLogout = () => {
+        logout();
+        setIsLogin(false);
+    }
+    const menuHeaderDropdown = (
+        <Menu>
+            <Menu.Item key="logout" onClick={handleLogout}>
+                <LogoutOutlined />
+                退出登录
+            </Menu.Item>
+        </Menu>
+    );
     let menu: (React.ReactElement | null)[] = [
         navigationNode,
         <GitHubButton
@@ -63,12 +77,21 @@ export const LayoutHeader = () => {
             namespace="liuyang-1990"
             repo="blog-react"
         />,
-        <Button size="small" key="signin" className="header-button header-signin-button">
-            登录
-        </Button>,
-        <Button size="small" key="signup" className="header-button header-signup-button" onClick={handleClick}>
-            注册
-       </Button>
+        isLogin ?
+            <Dropdown
+                overlay={menuHeaderDropdown}
+                placement={'bottomRight'}
+                overlayStyle={{ top: 68, minWidth: 160 }}
+                overlayClassName="avatar-container" >
+                <Avatar key={userName} alt="avatar">
+                    {userName.charAt(0)}
+                </Avatar>
+            </Dropdown>
+            :
+            <Button size="small" key="signup" className="header-button header-signup-button" onClick={handleClick}>
+                登录
+            </Button>
+
     ];
 
     if (responsive == "crowded") {
@@ -132,7 +155,7 @@ export const LayoutHeader = () => {
                     </div>
                 </div>
             </header>
-            <Signup visible={signupVisible} onCancel={handleHideSignUp} />
+            <Signup visible={modalVisible} onCancel={handleCancel} />
         </>
 
     )
