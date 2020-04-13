@@ -23,7 +23,7 @@ const links = [
     {
         key: 'ICP',
         title: '豫ICP备18041733号-1',
-        href: 'https://www.beian.miit.gov.cn"',
+        href: 'https://www.beian.miit.gov.cn',
         blankTarget: true,
     }
 ];

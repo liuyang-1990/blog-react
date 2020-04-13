@@ -35,8 +35,7 @@ const CustomApp = ({ Component, pageProps, token }) => {
 CustomApp.getInitialProps = async (appContext) => {
   const { ctx } = appContext;
   const appProps = await App.getInitialProps(appContext);
-  let { token } = nextCookie(ctx);
-
+  const { token } = nextCookie(ctx);
   return {
     ...appProps,
     token: token
