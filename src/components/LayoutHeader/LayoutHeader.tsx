@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Row, Col, Popover, Dropdown, Button, Avatar, Menu } from 'antd';
-import { UnorderedListOutlined, LogoutOutlined } from '@ant-design/icons';
+import { UnorderedListOutlined, LoginOutlined, LogoutOutlined } from '@ant-design/icons';
 import { SearchBox, Navigation } from './components';
-import { Signup } from "../SignupForm";
+import { LoginModal } from "../SignupForm";
 import { SiteContext, LoginContext } from '../../context';
 import cn from 'classnames';
 import GitHubButton from 'react-github-button';
@@ -18,7 +18,7 @@ export const LayoutHeader = () => {
     const [menuVisible, setMenuVisible] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const { isMobile, width, responsive } = useContext(SiteContext);
-    const { isLogin, setIsLogin, userName } = useContext(LoginContext);
+    const { isLogin, setIsLogin, userName, setUserName } = useContext(LoginContext);
     function onTriggerSearching(searching: boolean) {
         setSearching(searching);
     };
@@ -55,6 +55,7 @@ export const LayoutHeader = () => {
     const handleLogout = () => {
         logout();
         setIsLogin(false);
+        setUserName(null);
     }
     const menuHeaderDropdown = (
         <Menu>
@@ -79,19 +80,20 @@ export const LayoutHeader = () => {
         />,
         isLogin ?
             <Dropdown
+                key="avatar"
                 overlay={menuHeaderDropdown}
                 placement={'bottomRight'}
                 overlayStyle={{ top: 68, minWidth: 160 }}
                 overlayClassName="avatar-container" >
-                <Avatar key={userName} alt="avatar">
+                <Avatar alt="avatar">
                     {userName.charAt(0)}
                 </Avatar>
             </Dropdown>
             :
             <Button size="small" key="signup" className="header-button header-signup-button" onClick={handleClick}>
+                <LoginOutlined />
                 登录
             </Button>
-
     ];
 
     if (responsive == "crowded") {
@@ -155,7 +157,7 @@ export const LayoutHeader = () => {
                     </div>
                 </div>
             </header>
-            <Signup visible={modalVisible} onCancel={handleCancel} />
+            <LoginModal visible={modalVisible} onCancel={handleCancel} />
         </>
 
     )

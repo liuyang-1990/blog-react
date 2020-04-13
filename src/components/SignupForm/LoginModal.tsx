@@ -10,7 +10,7 @@ type Props = {
     onCancel: () => void;
 }
 const { TabPane } = Tabs;
-const Signup: FC<Props> = ({ visible, onCancel }) => {
+const LoginModal: FC<Props> = ({ visible, onCancel }) => {
 
 
     const other =
@@ -20,6 +20,7 @@ const Signup: FC<Props> = ({ visible, onCancel }) => {
                 <GithubOutlined className="icon" />
             </div>
         </>
+
 
     return (
         <Modal
@@ -43,4 +44,4 @@ const Signup: FC<Props> = ({ visible, onCancel }) => {
     )
 }
 
-export { Signup }
+export { LoginModal }

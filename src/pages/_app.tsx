@@ -6,12 +6,19 @@ import nextCookie from 'next-cookies';
 import '../styles/global.less';
 
 
-const CustomApp = ({ Component, pageProps, ...rest }) => {
-  const { token, userName } = rest;
+const CustomApp = ({ Component, pageProps, token }) => {
+  let loginName = '';
+  if (token) {
+    token = decodeURIComponent(token);
+    const tokenArr = token.split(";");
+    if (tokenArr.length > 1 && tokenArr[1].split(":").length > 1) {
+      loginName = tokenArr[1].split(":")[1];
+    }
+  }
   const [isLogin, setIsLogin] = useState(!!token);
-
+  const [userName, setUserName] = useState(loginName);
   return (
-    <LoginContext.Provider value={{ isLogin: isLogin, userName: userName, setIsLogin: setIsLogin }}>
+    <LoginContext.Provider value={{ isLogin: isLogin, userName: userName, setIsLogin: setIsLogin, setUserName: setUserName }}>
       <SiteContextProvider>
         <ThemeProvider>
           <ProgressLoading />
@@ -29,19 +36,10 @@ CustomApp.getInitialProps = async (appContext) => {
   const { ctx } = appContext;
   const appProps = await App.getInitialProps(appContext);
   let { token } = nextCookie(ctx);
-  let userName = '';
-  if (token) {
-    token = decodeURIComponent(token);
-    const tokenArr = token.split(";");
-    if (tokenArr.length > 1 && tokenArr[1].split(":").length > 1) {
-      userName = tokenArr[1].split(":")[1];
-    }
-  }
 
   return {
     ...appProps,
-    token: token,
-    userName: userName
+    token: token
   }
 }
 

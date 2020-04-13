@@ -1,1 +1,1 @@
-export { Signup } from "./SignupForm";
+export { LoginModal } from "./LoginModal";

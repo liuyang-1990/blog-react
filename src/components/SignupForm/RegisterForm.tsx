@@ -10,7 +10,7 @@ type Props = {
 const Register: FC<Props> = ({ onCancel }) => {
     const [count, setCount] = useState(0);
     const [submitting, setSubmitting] = useState(false);
-    const { setIsLogin } = useContext(LoginContext);
+    const { setIsLogin, setUserName } = useContext(LoginContext);
     const [form] = Form.useForm();
 
     let interval: number | undefined;
@@ -34,6 +34,7 @@ const Register: FC<Props> = ({ onCancel }) => {
             const { data } = res;
             const { AccessToken, Expires, UserName } = data;
             login({ token: `AccessToken:${AccessToken};UserName:${UserName}`, expires: Expires });
+            setUserName(values.UserName);
             setIsLogin(true);
             setSubmitting(false);
             onCancel && onCancel();
