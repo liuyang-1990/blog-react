@@ -1,22 +1,41 @@
-import { createServer } from 'http';
-import { parse } from 'url';
-import next from 'next';
+import Next from 'next';
+const fastify = require('fastify')({ logger: { level: 'error' }, pluginTimeout: -1 });
 
-const port = parseInt(process.env.PORT || '3000', 10);
+const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
-const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
-    createServer((req, res) => {
-        const parsedUrl = parse(req.url!, true);
-        // const { pathname, query } = parsedUrl;
-        handle(req, res, parsedUrl);
-    }).listen(port);
+fastify.register((fastify, opts, next) => {
+    const app = Next({ dev });
+    const handle = app.getRequestHandler();
+    app
+        .prepare()
+        .then(() => {
+            if (dev) {
+                fastify.get('/_next/*', (req, reply) => {
+                    return handle(req.req, reply.res).then(() => {
+                        reply.sent = true
+                    })
+                })
+            }
 
-    console.log(
-        `> Server listening at http://localhost:${port} as ${
-        dev ? 'development' : process.env.NODE_ENV
-        }`
-    );
+            fastify.all('/*', (req, reply) => {
+                return handle(req.req, reply.res).then(() => {
+                    reply.sent = true
+                })
+            })
+
+            fastify.setNotFoundHandler((request, reply) => {
+                return app.render404(request.req, reply.res).then(() => {
+                    reply.sent = true
+                })
+            })
+
+            next()
+        })
+        .catch(err => next(err))
+})
+
+fastify.listen(port, err => {
+    if (err) throw err
+    console.log(`> Ready on http://localhost:${port}`)
 })
