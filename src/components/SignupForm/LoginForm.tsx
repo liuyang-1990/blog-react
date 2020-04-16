@@ -16,7 +16,7 @@ const Login: FC<Props> = ({ onCancel }) => {
     const onFinish = async (values: { [key: string]: string }) => {
         setSubmitting(true);
         try {
-            const res = await httpClient.post('v1/account/login', values);
+            const res = await httpClient.post('account/login', values);
             const { data } = res;
             const { AccessToken, Expires, UserName } = data;
             login({ token: `AccessToken:${AccessToken};UserName:${UserName}`, expires: Expires });

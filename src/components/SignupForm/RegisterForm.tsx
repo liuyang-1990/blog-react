@@ -15,7 +15,12 @@ const Register: FC<Props> = ({ onCancel }) => {
 
     let interval: number | undefined;
 
-    const onGetCaptcha = () => {
+    const onGetCaptcha = async () => {
+        const email = form.getFieldValue('Email');
+        if (!email) {
+            return;
+        }
+        const res = await httpClient.get('account/captcha', { params: { to: encodeURIComponent(email) },headers:{"Content-Type":"application/x-www-form-urlencoded"} });
         let counts = 59;
         setCount(counts);
         interval = window.setInterval(() => {
@@ -30,7 +35,7 @@ const Register: FC<Props> = ({ onCancel }) => {
     const onFinish = async (values: { [key: string]: string }) => {
         setSubmitting(true);
         try {
-            const res = await httpClient.post('/v1/account/register', values);
+            const res = await httpClient.post('account/register', values);
             const { data } = res;
             const { AccessToken, Expires, UserName } = data;
             login({ token: `AccessToken:${AccessToken};UserName:${UserName}`, expires: Expires });

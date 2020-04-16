@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Modal, Tabs } from 'antd';
-import { GithubOutlined } from '@ant-design/icons';
+import { GithubOutlined, QqOutlined } from '@ant-design/icons';
 import { Register } from './RegisterForm';
 import { Login } from './LoginForm';
 import "./style.less";
@@ -18,6 +18,7 @@ const LoginModal: FC<Props> = ({ visible, onCancel }) => {
             <div className="other">
                 其他登录方式
                 <GithubOutlined className="icon" />
+                <QqOutlined className="icon" />
             </div>
         </>
 
