@@ -20,7 +20,7 @@ const Register: FC<Props> = ({ onCancel }) => {
         if (!email) {
             return;
         }
-        const res = await httpClient.get('account/captcha', { params: { to: encodeURIComponent(email) },headers:{"Content-Type":"application/x-www-form-urlencoded"} });
+        const res = await httpClient.get('account/captcha', { params: { to: encodeURIComponent(email) } });
         let counts = 59;
         setCount(counts);
         interval = window.setInterval(() => {
