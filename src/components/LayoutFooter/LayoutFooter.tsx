@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import cn from 'classnames';
 import { Layout } from 'antd';
 const { Footer } = Layout;
-import style from './style.less';
+import './style.less';
 
 type FooterProps = {
     links?: Array<{
