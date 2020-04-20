@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { Spin } from 'antd';
 import './style.less';
+import { isRegExp } from 'util';
 
 type Props = {
     initialLoad?: boolean;
@@ -32,6 +33,7 @@ const InfiniteScroll: FC<Props> = ({
                 // 如果不可见，就返回
                 if (entries[0].intersectionRatio <= 0) return;
                 if (loading) return;
+                if (!hasMore) return;
                 if (pageIndex >= triggerPageThreshold) {
                     intersectionObserver.unobserve(document.querySelector('#sentinel'));
                     return;

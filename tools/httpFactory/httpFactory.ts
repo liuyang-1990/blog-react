@@ -43,7 +43,6 @@ export class HttpFactory {
         } else {
             this.httpRequest.params = params || {};
         }
-        console.log(this.httpRequest);
         return axios(this.httpRequest);
     }
 

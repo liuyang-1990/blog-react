@@ -1,6 +1,6 @@
 import Next from 'next';
 import fastify from 'fastify';
-import axios from "axios";
+import { HttpFactory } from '../tools';
 // declare module 'fastify' {
 //     export interface FastifyInstance<
 //         HttpServer = Server,
@@ -19,8 +19,12 @@ const fastifyInstance = fastify({
 });
 
 
-const getData = async (code: string, state: string) => {
-    return await axios.get(`${process.env.BASE_ADDRESS}account/oauth?code=${code}&state=${state}`);
+const getData = async (code: string, state: string, type: string) => {
+    return new HttpFactory().create("oauth").send({
+        code: code,
+        state: state,
+        type: type
+    });
 }
 
 fastifyInstance.register((fastify, opts, next) => {
@@ -34,16 +38,21 @@ fastifyInstance.register((fastify, opts, next) => {
                 })
             });
         }
-        fastify.get('/oauth/*', async (req, reply) => {
+        fastify.get('/oauth/:type', async (req, reply) => {
+            const { type } = req.params;
             const { code, state } = req.query;
             const { referer } = req.headers;
-            const res = await getData(code, state);
-            if (res.data && res.status == 200) {
-                reply.redirect(referer || '/');
-            } else {
-                reply.send(new Error("someting went wrong."));
-            }
+            try {
+                const res = await getData(code, state, type);
+                if (res.data && res.status == 200) {
+                    reply.redirect(referer || '/');
+                } else {
+                    reply.send(new Error("someting went wrong."));
+                }
 
+            } catch (err) {
+                reply.code(500).send();
+            }
         });
 
         fastify.all('/*', (req, reply) => {

@@ -16,14 +16,19 @@ export default {
         Path: "account/register",
         Service: Service.BlogService
     },
-    captcha:{
+    captcha: {
         Method: "GET",
         Path: "account/captcha",
         Service: Service.BlogService
     },
-    oauth:{
+    oauth: {
         Method: "GET",
         Path: "account/oauth",
+        Service: Service.BlogService
+    },
+    getArticle: {
+        Method: "GET",
+        Path: "article/page",
         Service: Service.BlogService
     }
 }

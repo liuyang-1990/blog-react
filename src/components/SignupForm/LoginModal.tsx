@@ -16,7 +16,13 @@ type Props = {
 const { TabPane } = Tabs;
 const LoginModal: FC<Props> = ({ visible, onCancel }) => {
 
-
+    const handleQQOAuth = () => {
+        const authorize_uri = 'https://graph.qq.com/oauth2.0/authorize';
+        const client_id = '101722607';
+        const redirect_uri = 'http://localhost:3000/oauth/redirect';
+        const random = randomString(12);
+        window.location.href = `${authorize_uri}?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${random}`;
+    }
 
     const handleOAuth = () => {
         const authorize_uri = 'https://github.com/login/oauth/authorize';
@@ -30,7 +36,7 @@ const LoginModal: FC<Props> = ({ visible, onCancel }) => {
             <div className="other">
                 其他登录方式
                 <GithubOutlined className="icon" onClick={handleOAuth} />
-                {/* <QqOutlined className="icon" onClick={handleQQOAuth} /> */}
+                <QqOutlined className="icon" onClick={handleQQOAuth} />
             </div>
         </>
 

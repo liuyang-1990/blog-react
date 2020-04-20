@@ -36,6 +36,7 @@
     "babel-plugin-import": "^1.13.0",
     "classnames": "^2.2.6",
     "cross-env": "^7.0.2",
+    "dayjs": "^1.8.24",
     "dotenv": "^8.2.0",
     "fastify": "^2.13.1",
     "intersection-observer": "^0.7.0",
