@@ -13,11 +13,32 @@ export const LayoutContent = (props) => {
         const nextTheme = theme !== 'dark' ? 'dark' : 'default';
         setSiteTheme(nextTheme);
     }
+    const colProps =
+        props.disableSidebar ?
+            [{ flex: 'auto' }, { flex: 'none' }] :
+            [
+                {
+                    xxl: 17,
+                    xl: 17,
+                    lg: 24,
+                    md: 24,
+                    sm: 24,
+                    xs: 24,
+                },
+                {
+                    xxl: 7,
+                    xl: 7,
+                    lg: 0,
+                    md: 0,
+                    sm: 0,
+                    xs: 0,
+                },
+            ];
     return (
         <section className="contanier">
             <div className="content-wrap">
                 <Row>
-                    <Col xxl={17} xl={17} lg={24} md={24} sm={24} xs={24}>
+                    <Col {...colProps[0]}>
                         <div className="content">
                             {props.children}
                         </div>
@@ -38,9 +59,13 @@ export const LayoutContent = (props) => {
                             </Tooltip>
                         </div>
                     </Col>
-                    <Col xxl={7} xl={7} lg={0} md={0} sm={0} xs={0} className="main-menu">
-                        <SiderBar {...props} />
-                    </Col>
+                    {
+                        props.disableSidebar ?
+                            null :
+                            <Col {...colProps[1]} className="main-menu">
+                                <SiderBar {...props} />
+                            </Col>
+                    }
                 </Row>
             </div>
         </section>
